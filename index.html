@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MSK Ultrasound Image Comparisons</title>
+
+  <style>
+    :root{
+      --bg:#0b0d10;
+      --panel:#14181d;
+      --panel2:#1b2027;
+      --text:#f4f6f8;
+      --muted:#aeb7c2;
+      --line:#2b333d;
+      --accent:#73b7ff;
+      --good:#9be7b1;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    header{
+      padding:28px 18px 18px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,#10141a 0%, #0b0d10 100%);
+    }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+    }
+
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(24px,4vw,38px);
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    main{
+      padding:22px 18px 40px;
+    }
+
+    .case-tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:0 0 18px;
+    }
+
+    .case-tab{
+      appearance:none;
+      border:1px solid var(--line);
+      background:var(--panel);
+      color:var(--text);
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:15px;
+      cursor:pointer;
+      min-height:44px;
+    }
+
+    .case-tab[aria-selected="true"]{
+      border-color:var(--accent);
+      box-shadow:0 0 0 2px rgba(115,183,255,.15) inset;
+    }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px;
+    }
+
+    .case-head{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:16px;
+      align-items:start;
+      margin-bottom:14px;
+    }
+
+    .case-head h2{
+      margin:0 0 6px;
+      font-size:24px;
+    }
+
+    .meta{
+      color:var(--muted);
+      margin:0;
+      line-height:1.45;
+    }
+
+    .badge{
+      border:1px solid var(--line);
+      background:var(--panel2);
+      border-radius:999px;
+      padding:8px 11px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+    .compare{
+      position:relative;
+      width:100%;
+      overflow:hidden;
+      border-radius:12px;
+      background:#000;
+      aspect-ratio:4/3;
+      border:1px solid #000;
+
+      touch-action:pan-y;
+      isolation:isolate;
+      contain:layout paint;
+
+      user-select:none;
+      -webkit-user-select:none;
+      -webkit-touch-callout:none;
+
+      cursor:ew-resize;
+    }
+
+    .compare img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+
+      user-select:none;
+      -webkit-user-drag:none;
+
+      backface-visibility:hidden;
+      transform:translateZ(0);
+    }
+
+    .after-wrap{
+      position:absolute;
+      inset:0 auto 0 0;
+      width:50%;
+      overflow:hidden;
+      pointer-events:none;
+      will-change:width;
+      contain:paint;
+    }
+
+    .after-wrap img{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      max-width:none;
+      height:100%;
+      object-fit:contain;
+      object-position:left center;
+
+      pointer-events:none;
+      user-select:none;
+      -webkit-user-drag:none;
+
+      transform:translateZ(0);
+      backface-visibility:hidden;
+    }
+
+    .divider{
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:50%;
+      width:3px;
+      transform:translateX(-50%);
+      background:#fff;
+      box-shadow:0 0 8px rgba(0,0,0,.75);
+      pointer-events:none;
+    }
+
+    .knob{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      background:#fff;
+      color:#111;
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      box-shadow:0 3px 16px rgba(0,0,0,.4);
+      pointer-events:none;
+    }
+
+    .labels{
+      position:absolute;
+      left:12px;
+      right:12px;
+      top:12px;
+
+      display:flex;
+      justify-content:space-between;
+
+      pointer-events:none;
+      font-weight:700;
+      font-size:13px;
+      text-shadow:0 2px 4px rgba(0,0,0,.9);
+    }
+
+    .labels span{
+      background:rgba(0,0,0,.55);
+      padding:6px 8px;
+      border-radius:7px;
+    }
+
+    .range-row{
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      gap:12px;
+      align-items:center;
+      margin:14px 0 0;
+    }
+
+    input[type=range]{
+      width:100%;
+      min-height:44px;
+    }
+
+    .pct{
+      font-variant-numeric:tabular-nums;
+      color:var(--muted);
+      min-width:46px;
+      text-align:right;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    button.action{
+      appearance:none;
+      border:1px solid var(--line);
+      background:var(--panel2);
+      color:var(--text);
+      border-radius:10px;
+      padding:10px 14px;
+      min-height:44px;
+      font-size:15px;
+      cursor:pointer;
+    }
+
+    button.action:hover{
+      border-color:#495563;
+    }
+
+    .prompt{
+      margin-top:16px;
+      padding:14px 16px;
+      background:var(--panel2);
+      border:1px solid var(--line);
+      border-radius:12px;
+      line-height:1.5;
+    }
+
+    .prompt strong{
+      display:block;
+      margin-bottom:5px;
+    }
+
+    .answer{
+      display:none;
+      margin-top:12px;
+      padding:12px 14px;
+      border-left:4px solid var(--good);
+      background:rgba(155,231,177,.08);
+      border-radius:8px;
+      line-height:1.5;
+    }
+
+    footer{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 18px 36px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    @media (max-width:650px){
+      .case-head{
+        grid-template-columns:1fr;
+      }
+
+      .badge{
+        justify-self:start;
+      }
+
+      .card{
+        padding:12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>MSK Ultrasound Image Comparisons</h1>
+
+    <p class="sub">
+      Choose a case, then drag the slider to move between the
+      unannotated and annotated images.
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div
+    id="tabs"
+    class="case-tabs"
+    role="tablist"
+    aria-label="Ultrasound cases">
+  </div>
+
+  <section
+    id="viewer"
+    class="card"
+    aria-live="polite">
+  </section>
+
+</main>
+
+<footer>
+  MSK ultrasound teaching resource.
+</footer>
+
+<script>
+
+const cases = [
+
+  {
+    id: "case-01",
+
+    title: "Case 1 — 3rd/4th webspace",
+
+    subtitle: "Interdigital region",
+
+    plain:
+      "images/case-01-plain.png",
+
+    annotated:
+      "images/case-01-annotated.jpg",
+
+    prompt:
+      "Before revealing the annotations, identify the main structure or abnormality and describe its relationship to the surrounding tissues.",
+
+    teachingNote:
+      "Annotated image demonstrates the measured lesion in the 3rd/4th webspace and the course of the interdigital nerve marked by the red arrows."
+  }
+
+
+  /*
+  ============================================================
+  ADD MORE CASES HERE
+  ============================================================
+
+  Put a comma after the previous case and copy this example.
+
+  ,{
+    id: "case-02",
+
+    title: "Case 2 — Achilles tendon",
+
+    subtitle: "Long-axis insertion",
+
+    plain:
+      "images/case-02-plain.jpg",
+
+    annotated:
+      "images/case-02-annotated.jpg",
+
+    prompt:
+      "What abnormality can you identify?",
+
+    teachingNote:
+      "Your teaching note here."
+  }
+
+  */
+
+];
+
+
+const tabs =
+  document.getElementById("tabs");
+
+const viewer =
+  document.getElementById("viewer");
+
+let activeIndex = 0;
+
+
+function renderTabs(){
+
+  tabs.innerHTML = "";
+
+  cases.forEach((c,i)=>{
+
+    const b =
+      document.createElement("button");
+
+    b.className =
+      "case-tab";
+
+    b.type =
+      "button";
+
+    b.setAttribute(
+      "role",
+      "tab"
+    );
+
+    b.setAttribute(
+      "aria-selected",
+      i === activeIndex
+        ? "true"
+        : "false"
+    );
+
+    b.textContent =
+      c.title.replace(
+        /^Case \d+ — /,
+        "Case " + (i+1) + " — "
+      );
+
+    b.addEventListener(
+      "click",
+      ()=>{
+
+        activeIndex = i;
+
+        renderTabs();
+
+        renderCase();
+
+      }
+    );
+
+    tabs.appendChild(b);
+
+  });
+
+}
+
+
+function renderCase(){
+
+  const c =
+    cases[activeIndex];
+
+
+  if(!c){
+
+    viewer.innerHTML =
+      '<div>No cases have been added yet.</div>';
+
+    return;
+
+  }
+
+
+  viewer.innerHTML = `
+
+    <div class="case-head">
+
+      <div>
+
+        <h2>
+          ${escapeHtml(c.title)}
+        </h2>
+
+        <p class="meta">
+          ${escapeHtml(c.subtitle || "")}
+        </p>
+
+      </div>
+
+      <div class="badge">
+        ${activeIndex+1}
+        of
+        ${cases.length}
+      </div>
+
+    </div>
+
+
+    <div
+      class="compare"
+      id="compare"
+      aria-label="Interactive ultrasound comparison"
+    >
+
+      <img
+        src="${c.plain}"
+        alt="Unannotated ultrasound image"
+        draggable="false"
+      >
+
+
+      <div
+        class="after-wrap"
+        id="afterWrap"
+      >
+
+        <img
+          src="${c.annotated}"
+          alt="Annotated ultrasound image"
+          id="afterImg"
+          draggable="false"
+        >
+
+      </div>
+
+
+      <div
+        class="divider"
+        id="divider">
+      </div>
+
+
+      <div
+        class="knob"
+        id="knob">
+        ↔
+      </div>
+
+
+      <div class="labels">
+
+        <span>
+          Unannotated
+        </span>
+
+        <span>
+          Annotated
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="range-row">
+
+      <span>
+        Plain
+      </span>
+
+      <input
+        id="range"
+        type="range"
+        min="0"
+        max="100"
+        value="50"
+        aria-label="Move comparison slider"
+      >
+
+      <span
+        class="pct"
+        id="pct">
+        50%
+      </span>
+
+    </div>
+
+
+    <div class="actions">
+
+      <button
+        class="action"
+        id="reset"
+        type="button">
+        Reset slider
+      </button>
+
+
+      <button
+        class="action"
+        id="showPlain"
+        type="button">
+        Show plain image
+      </button>
+
+
+      <button
+        class="action"
+        id="showAnnotated"
+        type="button">
+        Show annotated image
+      </button>
+
+    </div>
+
+
+    <div class="prompt">
+
+      <strong>
+        Teaching prompt
+      </strong>
+
+      ${escapeHtml(c.prompt)}
+
+
+      <div class="actions">
+
+        <button
+          class="action"
+          id="reveal"
+          type="button">
+          Reveal teaching note
+        </button>
+
+      </div>
+
+
+      <div
+        class="answer"
+        id="answer">
+
+        ${escapeHtml(c.teachingNote)}
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  const range =
+    document.getElementById("range");
+
+  const afterWrap =
+    document.getElementById("afterWrap");
+
+  const afterImg =
+    document.getElementById("afterImg");
+
+  const divider =
+    document.getElementById("divider");
+
+  const knob =
+    document.getElementById("knob");
+
+  const pct =
+    document.getElementById("pct");
+
+  const compare =
+    document.getElementById("compare");
+
+
+  let currentValue = 50;
+
+  let pendingValue = 50;
+
+  let rafId = 0;
+
+
+  function syncOverlayImageWidth(){
+
+    const r =
+      compare.getBoundingClientRect();
+
+    afterImg.style.width =
+      r.width + "px";
+
+    afterImg.style.height =
+      r.height + "px";
+
+  }
+
+
+  function paint(){
+
+    rafId = 0;
+
+    const v =
+      pendingValue;
+
+    currentValue =
+      v;
+
+    range.value =
+      v;
+
+    afterWrap.style.width =
+      v + "%";
+
+    divider.style.left =
+      v + "%";
+
+    knob.style.left =
+      v + "%";
+
+    pct.textContent =
+      Math.round(v) + "%";
+
+  }
+
+
+  function setPos(v){
+
+    pendingValue =
+      Math.max(
+        0,
+        Math.min(
+          100,
+          Number(v)
+        )
+      );
+
+    if(!rafId){
+
+      rafId =
+        requestAnimationFrame(
+          paint
+        );
+
+    }
+
+  }
+
+
+  syncOverlayImageWidth();
+
+
+  window.addEventListener(
+    "resize",
+    ()=>{
+
+      syncOverlayImageWidth();
+
+      setPos(
+        currentValue
+      );
+
+    }
+  );
+
+
+  range.addEventListener(
+    "input",
+    e =>
+      setPos(
+        e.target.value
+      )
+  );
+
+
+  function pointerToValue(clientX){
+
+    const r =
+      compare.getBoundingClientRect();
+
+    return (
+      (clientX - r.left)
+      /
+      r.width
+    ) * 100;
+
+  }
+
+
+  let dragging =
+    false;
+
+
+  compare.addEventListener(
+    "selectstart",
+    e =>
+      e.preventDefault()
+  );
+
+
+  compare.addEventListener(
+    "dragstart",
+    e =>
+      e.preventDefault()
+  );
+
+
+  compare.addEventListener(
+    "pointerdown",
+    e => {
+
+      e.preventDefault();
+
+      if(
+        e.pointerType === "mouse"
+        &&
+        e.button !== 0
+      ){
+        return;
+      }
+
+      dragging =
+        true;
+
+      compare.setPointerCapture(
+        e.pointerId
+      );
+
+      setPos(
+        pointerToValue(
+          e.clientX
+        )
+      );
+
+    }
+  );
+
+
+  compare.addEventListener(
+    "pointermove",
+    e => {
+
+      if(!dragging){
+        return;
+      }
+
+      if(
+        e.pointerType !== "touch"
+      ){
+        e.preventDefault();
+      }
+
+      setPos(
+        pointerToValue(
+          e.clientX
+        )
+      );
+
+    }
+  );
+
+
+  compare.addEventListener(
+    "pointerup",
+    e => {
+
+      dragging =
+        false;
+
+      try{
+
+        compare.releasePointerCapture(
+          e.pointerId
+        );
+
+      }
+      catch(_){}
+
+    }
+  );
+
+
+  compare.addEventListener(
+    "pointercancel",
+    e => {
+
+      dragging =
+        false;
+
+      try{
+
+        compare.releasePointerCapture(
+          e.pointerId
+        );
+
+      }
+      catch(_){}
+
+    }
+  );
+
+
+  document
+    .getElementById("reset")
+    .addEventListener(
+      "click",
+      ()=>setPos(50)
+    );
+
+
+  document
+    .getElementById("showPlain")
+    .addEventListener(
+      "click",
+      ()=>setPos(0)
+    );
+
+
+  document
+    .getElementById("showAnnotated")
+    .addEventListener(
+      "click",
+      ()=>setPos(100)
+    );
+
+
+  const reveal =
+    document.getElementById(
+      "reveal"
+    );
+
+
+  const answer =
+    document.getElementById(
+      "answer"
+    );
+
+
+  reveal.addEventListener(
+    "click",
+    ()=>{
+
+      const visible =
+        answer.style.display
+        === "block";
+
+
+      answer.style.display =
+        visible
+        ? "none"
+        : "block";
+
+
+      reveal.textContent =
+        visible
+        ? "Reveal teaching note"
+        : "Hide teaching note";
+
+    }
+  );
+
+}
+
+
+function escapeHtml(s){
+
+  return String(
+    s ?? ""
+  ).replace(
+    /[&<>"']/g,
+    ch => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+    })[ch]
+  );
+
+}
+
+
+renderTabs();
+
+renderCase();
+
+</script>
+
+</body>
+</html>
