@@ -13,7 +13,3257 @@
 
 <style>
 
+:root{<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1">
+
+<title>PgCert. MSK Ultrasound Image Bank</title>
+
+<style>
+
+/* =========================================================
+COLOURS
+========================================================= */
+
 :root{
+
+  --bg:#090c0b;
+  --surface:#111613;
+  --surface2:#171e1a;
+  --surface3:#1d2621;
+
+  --text:#f4f7f5;
+  --muted:#aab5ae;
+  --border:#2b3630;
+
+  --green:#8dc63f;
+  --green-dark:#639327;
+  --green-soft:rgba(141,198,63,.12);
+
+  --amber:#efb84c;
+  --red:#e56f6f;
+
+  --max:1180px;
+
+}
+
+
+/* =========================================================
+GENERAL
+========================================================= */
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+
+  margin:0;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(141,198,63,.06),
+      transparent 28%
+    ),
+    var(--bg);
+
+  color:var(--text);
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button:focus-visible,
+input:focus-visible{
+
+  outline:
+    3px solid
+    rgba(141,198,63,.45);
+
+  outline-offset:2px;
+
+}
+
+.wrap{
+
+  width:min(
+    calc(100% - 36px),
+    var(--max)
+  );
+
+  margin:
+    0 auto;
+
+}
+
+
+/* =========================================================
+PASSWORD SCREEN
+========================================================= */
+
+.gate{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:9999;
+
+  display:grid;
+
+  place-items:center;
+
+  padding:24px;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(141,198,63,.10),
+      transparent 35%
+    ),
+    #090c0b;
+
+}
+
+.gate-card{
+
+  width:min(
+    450px,
+    100%
+  );
+
+  padding:32px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:22px;
+
+  background:
+    rgba(17,22,19,.96);
+
+  box-shadow:
+    0 28px 80px
+    rgba(0,0,0,.45);
+
+}
+
+.gate-logo{
+
+  display:block;
+
+  width:170px;
+
+  max-height:80px;
+
+  object-fit:contain;
+
+  margin:
+    0 auto
+    26px;
+
+}
+
+.gate-eyebrow{
+
+  margin-bottom:7px;
+
+  color:var(--green);
+
+  font-size:12px;
+
+  font-weight:800;
+
+  letter-spacing:.14em;
+
+  text-transform:uppercase;
+
+}
+
+.gate-card h2{
+
+  margin:
+    0 0 9px;
+
+  font-size:29px;
+
+}
+
+.gate-card p{
+
+  margin:
+    0 0 22px;
+
+  color:var(--muted);
+
+  line-height:1.55;
+
+}
+
+.gate-card label{
+
+  display:block;
+
+  margin-bottom:7px;
+
+  font-weight:700;
+
+}
+
+.gate-card input{
+
+  width:100%;
+
+  min-height:50px;
+
+  padding:
+    11px 13px;
+
+  border:
+    1px solid
+    #3b493f;
+
+  border-radius:11px;
+
+  background:#0c100e;
+
+  color:var(--text);
+
+  font-size:16px;
+
+}
+
+.gate-card button{
+
+  width:100%;
+
+  min-height:50px;
+
+  margin-top:13px;
+
+  border:0;
+
+  border-radius:11px;
+
+  background:var(--green);
+
+  color:#10160d;
+
+  font-size:16px;
+
+  font-weight:850;
+
+  cursor:pointer;
+
+}
+
+.gate-card button:hover{
+
+  background:#9cd453;
+
+}
+
+.gate-error{
+
+  min-height:22px;
+
+  margin-top:11px;
+
+  color:#ffaaaa;
+
+  font-size:14px;
+
+}
+
+body.locked > header,
+body.locked > main,
+body.locked > footer{
+
+  visibility:hidden;
+
+}
+
+
+/* =========================================================
+HEADER
+========================================================= */
+
+header{
+
+  border-bottom:
+    1px solid
+    var(--border);
+
+  background:
+    rgba(11,15,12,.92);
+
+}
+
+.header-inner{
+
+  min-height:108px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:
+    space-between;
+
+  gap:30px;
+
+  padding:
+    20px 0;
+
+}
+
+.header-eyebrow{
+
+  margin-bottom:6px;
+
+  color:var(--green);
+
+  font-size:12px;
+
+  font-weight:800;
+
+  letter-spacing:.13em;
+
+  text-transform:uppercase;
+
+}
+
+.header-title{
+
+  margin:0;
+
+  font-size:
+    clamp(
+      26px,
+      4vw,
+      40px
+    );
+
+  line-height:1.08;
+
+}
+
+.header-subtitle{
+
+  margin:
+    7px 0 0;
+
+  color:var(--muted);
+
+  line-height:1.5;
+
+}
+
+.keele-logo{
+
+  width:180px;
+
+  max-width:28%;
+
+  max-height:82px;
+
+  object-fit:contain;
+
+}
+
+
+/* =========================================================
+LANDING PAGE
+========================================================= */
+
+main{
+
+  padding:
+    34px 0
+    50px;
+
+}
+
+.hero{
+
+  overflow:hidden;
+
+  position:relative;
+
+  margin-bottom:28px;
+
+  padding:
+    clamp(
+      25px,
+      5vw,
+      48px
+    );
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #151d18,
+      #0f1511
+    );
+
+}
+
+.hero::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:260px;
+
+  height:260px;
+
+  right:-80px;
+
+  top:-100px;
+
+  border-radius:50%;
+
+  background:
+    rgba(141,198,63,.08);
+
+}
+
+.hero-label{
+
+  position:relative;
+
+  z-index:1;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  margin-bottom:13px;
+
+  color:var(--green);
+
+  font-size:13px;
+
+  font-weight:800;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+}
+
+.hero h2{
+
+  position:relative;
+
+  z-index:1;
+
+  max-width:760px;
+
+  margin:
+    0 0 14px;
+
+  font-size:
+    clamp(
+      30px,
+      5vw,
+      52px
+    );
+
+  line-height:1.05;
+
+}
+
+.hero p{
+
+  position:relative;
+
+  z-index:1;
+
+  max-width:720px;
+
+  margin:0;
+
+  color:var(--muted);
+
+  font-size:
+    clamp(
+      16px,
+      2vw,
+      19px
+    );
+
+  line-height:1.6;
+
+}
+
+.hero-actions{
+
+  position:relative;
+
+  z-index:1;
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:12px;
+
+  margin-top:25px;
+
+}
+
+
+/* =========================================================
+BUTTONS
+========================================================= */
+
+.primary-button,
+.secondary-button{
+
+  min-height:46px;
+
+  padding:
+    10px 17px;
+
+  border-radius:11px;
+
+  font-weight:800;
+
+  cursor:pointer;
+
+}
+
+.primary-button{
+
+  border:0;
+
+  background:
+    var(--green);
+
+  color:#10160d;
+
+}
+
+.primary-button:hover{
+
+  background:#9cd453;
+
+}
+
+.secondary-button{
+
+  border:
+    1px solid
+    var(--border);
+
+  background:
+    var(--surface2);
+
+  color:var(--text);
+
+}
+
+.secondary-button:hover{
+
+  border-color:
+    #536359;
+
+}
+
+
+/* =========================================================
+IMAGE BANK LANDING CARDS
+========================================================= */
+
+.library-heading{
+
+  display:flex;
+
+  align-items:end;
+
+  justify-content:
+    space-between;
+
+  gap:18px;
+
+  margin:
+    0 0 15px;
+
+}
+
+.library-heading h3{
+
+  margin:0;
+
+  font-size:22px;
+
+}
+
+.library-heading p{
+
+  margin:0;
+
+  color:var(--muted);
+
+}
+
+.case-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(
+        250px,
+        1fr
+      )
+    );
+
+  gap:16px;
+
+}
+
+.library-card{
+
+  text-align:left;
+
+  min-height:180px;
+
+  padding:20px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:17px;
+
+  background:
+    var(--surface);
+
+  color:var(--text);
+
+  cursor:pointer;
+
+  transition:
+    transform .15s ease,
+    border-color .15s ease,
+    background .15s ease;
+
+}
+
+.library-card:hover{
+
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(141,198,63,.7);
+
+  background:
+    #151d18;
+
+}
+
+.library-card-number{
+
+  color:var(--green);
+
+  font-size:12px;
+
+  font-weight:850;
+
+  letter-spacing:.1em;
+
+  text-transform:uppercase;
+
+}
+
+.library-card h4{
+
+  margin:
+    8px 0
+    6px;
+
+  font-size:20px;
+
+}
+
+.library-card p{
+
+  margin:0;
+
+  color:var(--muted);
+
+  line-height:1.5;
+
+}
+
+.tag-row{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:7px;
+
+  margin-top:16px;
+
+}
+
+
+/* =========================================================
+TAGS
+========================================================= */
+
+.tag{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  min-height:27px;
+
+  padding:
+    4px 9px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:999px;
+
+  background:
+    var(--surface2);
+
+  color:#cbd5ce;
+
+  font-size:12px;
+
+  font-weight:700;
+
+}
+
+.difficulty{
+
+  border-color:
+    rgba(141,198,63,.38);
+
+  background:
+    var(--green-soft);
+
+  color:#bce57f;
+
+}
+
+
+/* =========================================================
+CASE VIEWER
+========================================================= */
+
+#caseView{
+
+  display:none;
+
+}
+
+.case-shell{
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:22px;
+
+  background:
+    var(--surface);
+
+}
+
+.case-topbar{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:
+    space-between;
+
+  gap:18px;
+
+  padding:
+    18px 20px;
+
+  border-bottom:
+    1px solid
+    var(--border);
+
+  background:
+    var(--surface2);
+
+}
+
+.back-button{
+
+  border:0;
+
+  padding:0;
+
+  background:none;
+
+  color:
+    var(--muted);
+
+  font-weight:750;
+
+  cursor:pointer;
+
+}
+
+.back-button:hover{
+
+  color:var(--text);
+
+}
+
+.progress-copy{
+
+  color:
+    var(--muted);
+
+  font-size:13px;
+
+  font-weight:700;
+
+}
+
+.progress-track{
+
+  width:150px;
+
+  height:6px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#29322d;
+
+}
+
+.progress-fill{
+
+  height:100%;
+
+  width:0;
+
+  border-radius:999px;
+
+  background:
+    var(--green);
+
+  transition:
+    width .2s ease;
+
+}
+
+.case-content{
+
+  padding:
+    clamp(
+      16px,
+      4vw,
+      30px
+    );
+
+}
+
+.case-heading{
+
+  display:flex;
+
+  align-items:start;
+
+  justify-content:
+    space-between;
+
+  gap:25px;
+
+  margin-bottom:20px;
+
+}
+
+.case-number{
+
+  margin-bottom:6px;
+
+  color:var(--green);
+
+  font-size:12px;
+
+  font-weight:850;
+
+  letter-spacing:.1em;
+
+  text-transform:uppercase;
+
+}
+
+.case-heading h2{
+
+  margin:
+    0 0 8px;
+
+  font-size:
+    clamp(
+      25px,
+      4vw,
+      36px
+    );
+
+}
+
+.case-heading p{
+
+  margin:0;
+
+  color:var(--muted);
+
+}
+
+
+/* =========================================================
+CLINICAL HISTORY
+========================================================= */
+
+.history-box{
+
+  display:grid;
+
+  grid-template-columns:
+    auto 1fr;
+
+  gap:15px;
+
+  margin-bottom:22px;
+
+  padding:
+    16px 18px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:14px;
+
+  background:
+    var(--surface2);
+
+}
+
+.history-icon{
+
+  width:38px;
+
+  height:38px;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:10px;
+
+  background:
+    var(--green-soft);
+
+  color:
+    var(--green);
+
+  font-weight:900;
+
+}
+
+.history-box strong{
+
+  display:block;
+
+  margin-bottom:5px;
+
+}
+
+.history-box p{
+
+  margin:0;
+
+  color:#d6ddd8;
+
+  line-height:1.55;
+
+}
+
+
+/* =========================================================
+QUESTION
+========================================================= */
+
+.challenge{
+
+  margin:
+    0 0 19px;
+
+}
+
+.challenge-label{
+
+  margin-bottom:5px;
+
+  color:var(--green);
+
+  font-size:12px;
+
+  font-weight:850;
+
+  letter-spacing:.1em;
+
+  text-transform:uppercase;
+
+}
+
+.challenge h3{
+
+  margin:0;
+
+  font-size:
+    clamp(
+      20px,
+      3vw,
+      26px
+    );
+
+  line-height:1.35;
+
+}
+
+
+/* =========================================================
+IMAGE VIEWER
+========================================================= */
+
+.viewer-frame{
+
+  overflow:hidden;
+
+  padding:10px;
+
+  border:
+    1px solid
+    #313c35;
+
+  border-radius:17px;
+
+  background:#050706;
+
+}
+
+.compare{
+
+  position:relative;
+
+  width:100%;
+
+  overflow:hidden;
+
+  border-radius:11px;
+
+  background:#000;
+
+  aspect-ratio:4/3;
+
+  user-select:none;
+
+  -webkit-user-select:none;
+
+  -webkit-touch-callout:none;
+
+  touch-action:pan-y;
+
+  isolation:isolate;
+
+  contain:
+    layout paint;
+
+  cursor:ew-resize;
+
+}
+
+.compare img{
+
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:contain;
+
+  user-select:none;
+
+  -webkit-user-select:none;
+
+  -webkit-user-drag:none;
+
+  pointer-events:none;
+
+  backface-visibility:hidden;
+
+  transform:
+    translateZ(0);
+
+}
+
+
+/* Annotated image starts completely hidden */
+
+.after-wrap{
+
+  position:absolute;
+
+  top:0;
+
+  bottom:0;
+
+  left:0;
+
+  width:0%;
+
+  overflow:hidden;
+
+  pointer-events:none;
+
+  contain:paint;
+
+  will-change:width;
+
+}
+
+.after-wrap img{
+
+  position:absolute;
+
+  top:0;
+
+  left:0;
+
+  max-width:none;
+
+  object-fit:contain;
+
+  object-position:
+    left center;
+
+  pointer-events:none;
+
+  user-select:none;
+
+  -webkit-user-select:none;
+
+  -webkit-user-drag:none;
+
+  backface-visibility:hidden;
+
+  transform:
+    translateZ(0);
+
+}
+
+.divider{
+
+  position:absolute;
+
+  top:0;
+
+  bottom:0;
+
+  left:0%;
+
+  width:3px;
+
+  transform:
+    translateX(-50%);
+
+  background:#fff;
+
+  box-shadow:
+    0 0 10px
+    rgba(0,0,0,.8);
+
+  pointer-events:none;
+
+}
+
+.knob{
+
+  position:absolute;
+
+  top:50%;
+
+  left:0%;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  min-width:66px;
+
+  height:38px;
+
+  padding:
+    0 11px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:5px;
+
+  border-radius:999px;
+
+  border:
+    2px solid
+    rgba(0,0,0,.25);
+
+  background:#fff;
+
+  color:#131713;
+
+  box-shadow:
+    0 5px 18px
+    rgba(0,0,0,.42);
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:.07em;
+
+  pointer-events:none;
+
+}
+
+.image-label{
+
+  position:absolute;
+
+  z-index:4;
+
+  top:13px;
+
+  padding:
+    7px 10px;
+
+  border-radius:8px;
+
+  background:
+    rgba(0,0,0,.62);
+
+  color:#fff;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  pointer-events:none;
+
+}
+
+.image-label.left{
+
+  left:13px;
+
+}
+
+.image-label.right{
+
+  right:13px;
+
+}
+
+.slider-help{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:8px;
+
+  padding:
+    13px 0
+    2px;
+
+  color:var(--muted);
+
+  font-size:13px;
+
+}
+
+
+/* =========================================================
+SLIDER CONTROL
+========================================================= */
+
+.range-row{
+
+  display:grid;
+
+  grid-template-columns:
+    auto 1fr auto;
+
+  gap:13px;
+
+  align-items:center;
+
+  margin-top:13px;
+
+}
+
+.range-row span{
+
+  color:var(--muted);
+
+  font-size:13px;
+
+  font-weight:700;
+
+}
+
+input[type=range]{
+
+  width:100%;
+
+  min-height:40px;
+
+  cursor:pointer;
+
+  accent-color:
+    var(--green);
+
+}
+
+
+/* =========================================================
+VIEWER ACTIONS
+========================================================= */
+
+.viewer-actions{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:10px;
+
+  margin-top:15px;
+
+}
+
+
+/* =========================================================
+REVEAL CARDS
+========================================================= */
+
+.reveal-section{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:14px;
+
+  margin-top:23px;
+
+}
+
+.reveal-card{
+
+  padding:17px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:15px;
+
+  background:
+    var(--surface2);
+
+}
+
+.reveal-card-title{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:
+    space-between;
+
+  gap:10px;
+
+}
+
+.reveal-card h4{
+
+  margin:0;
+
+  font-size:17px;
+
+}
+
+.reveal-content{
+
+  display:none;
+
+  margin-top:14px;
+
+  padding-top:14px;
+
+  border-top:
+    1px solid
+    var(--border);
+
+  color:#dce3de;
+
+  line-height:1.6;
+
+}
+
+.reveal-content strong{
+
+  color:#fff;
+
+}
+
+.reveal-button{
+
+  min-height:39px;
+
+  padding:
+    8px 12px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:9px;
+
+  background:
+    var(--surface3);
+
+  color:var(--text);
+
+  font-size:13px;
+
+  font-weight:800;
+
+  cursor:pointer;
+
+}
+
+.reveal-button:hover{
+
+  border-color:
+    var(--green);
+
+}
+
+
+/* =========================================================
+BOTTOM NAVIGATION
+========================================================= */
+
+.case-nav{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:
+    space-between;
+
+  gap:12px;
+
+  margin-top:25px;
+
+  padding-top:20px;
+
+  border-top:
+    1px solid
+    var(--border);
+
+}
+
+.case-nav-right{
+
+  display:flex;
+
+  gap:10px;
+
+}
+
+
+/* =========================================================
+FOOTER
+========================================================= */
+
+footer{
+
+  padding:
+    0 0
+    35px;
+
+  color:
+    #7f8b84;
+
+  font-size:13px;
+
+}
+
+.footer-inner{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:
+    space-between;
+
+  gap:20px;
+
+  padding-top:18px;
+
+  border-top:
+    1px solid
+    var(--border);
+
+}
+
+
+/* =========================================================
+ANIMATION
+========================================================= */
+
+.fade-in{
+
+  animation:
+    fadeIn
+    .22s ease;
+
+}
+
+@keyframes fadeIn{
+
+  from{
+
+    opacity:0;
+
+    transform:
+      translateY(4px);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+      translateY(0);
+
+  }
+
+}
+
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media(
+  max-width:720px
+){
+
+  .header-inner{
+
+    align-items:flex-start;
+
+    flex-direction:column;
+
+    min-height:auto;
+
+  }
+
+  .keele-logo{
+
+    width:145px;
+
+    max-width:60%;
+
+  }
+
+  .library-heading{
+
+    align-items:flex-start;
+
+    flex-direction:column;
+
+  }
+
+  .case-topbar{
+
+    align-items:flex-start;
+
+    flex-direction:column;
+
+  }
+
+  .progress-track{
+
+    width:100%;
+
+  }
+
+  .case-heading{
+
+    flex-direction:column;
+
+  }
+
+  .reveal-section{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .case-nav{
+
+    align-items:stretch;
+
+    flex-direction:column;
+
+  }
+
+  .case-nav-right{
+
+    display:grid;
+
+    grid-template-columns:
+      1fr 1fr;
+
+  }
+
+  .case-nav-right button{
+
+    width:100%;
+
+  }
+
+  .footer-inner{
+
+    align-items:flex-start;
+
+    flex-direction:column;
+
+  }
+
+}
+
+
+/* =========================================================
+VERY SMALL SCREENS
+========================================================= */
+
+@media(
+  max-width:430px
+){
+
+  .history-box{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .knob{
+
+    min-width:52px;
+
+    padding:
+      0 7px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body class="locked">
+
+
+<!-- ======================================================
+PASSWORD SCREEN
+====================================================== -->
+
+<div
+  class="gate"
+  id="passwordGate"
+>
+
+<form
+  class="gate-card"
+  id="passwordForm"
+>
+
+<img
+  src="images/keele-logo.png"
+  alt="Keele University"
+  class="gate-logo"
+>
+
+<div class="gate-eyebrow">
+PgCert Medical Ultrasound
+</div>
+
+<h2>
+MSK Ultrasound Image Bank
+</h2>
+
+<p>
+This teaching resource is for students enrolled on the PgCert Medical Ultrasound programme.
+</p>
+
+<label
+  for="sitePassword"
+>
+Password
+</label>
+
+<input
+  id="sitePassword"
+  type="password"
+  autocomplete="current-password"
+  required
+>
+
+<button
+  type="submit"
+>
+Enter Image Bank
+</button>
+
+<div
+  class="gate-error"
+  id="passwordError"
+  aria-live="polite"
+>
+</div>
+
+</form>
+
+</div>
+
+
+<!-- ======================================================
+HEADER
+====================================================== -->
+
+<header>
+
+<div
+  class="wrap header-inner"
+>
+
+<div>
+
+<div class="header-eyebrow">
+PgCert Medical Ultrasound
+</div>
+
+<h1 class="header-title">
+PgCert. MSK Ultrasound Image Bank
+</h1>
+
+<p class="header-subtitle">
+Compare. Interpret. Reveal.
+</p>
+
+</div>
+
+<img
+  src="images/keele-logo.png"
+  alt="Keele University"
+  class="keele-logo"
+>
+
+</div>
+
+</header>
+
+
+<!-- ======================================================
+MAIN
+====================================================== -->
+
+<main class="wrap">
+
+
+<!-- LANDING PAGE -->
+
+<section
+  id="libraryView"
+  class="fade-in"
+>
+
+<div class="hero">
+
+<div class="hero-label">
+MSK Ultrasound Learning Resource
+</div>
+
+<h2>
+Build your eye for ultrasound.
+</h2>
+
+<p>
+Work through the image bank one case at a time. Review the clinical context, assess the unannotated scan, then drag across the image to reveal the teaching annotations.
+</p>
+
+<div class="hero-actions">
+
+<button
+  class="primary-button"
+  id="startButton"
+  type="button"
+>
+Start with Case 1 →
+</button>
+
+</div>
+
+</div>
+
+
+<div class="library-heading">
+
+<div>
+
+<h3>
+Case Library
+</h3>
+
+<p>
+Select an image set to begin.
+</p>
+
+</div>
+
+</div>
+
+
+<div
+  class="case-grid"
+  id="caseGrid"
+>
+</div>
+
+</section>
+
+
+<!-- ======================================================
+CASE VIEW
+====================================================== -->
+
+<section
+  id="caseView"
+>
+
+<div class="case-shell fade-in">
+
+
+<div class="case-topbar">
+
+<button
+  class="back-button"
+  id="backToLibrary"
+  type="button"
+>
+← Image Bank
+</button>
+
+
+<div>
+
+<div
+  class="progress-copy"
+  id="progressCopy"
+>
+</div>
+
+<div class="progress-track">
+
+<div
+  class="progress-fill"
+  id="progressFill"
+>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+  class="case-content"
+  id="caseContent"
+>
+</div>
+
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<!-- ======================================================
+FOOTER
+====================================================== -->
+
+<footer>
+
+<div class="wrap footer-inner">
+
+<div>
+Keele University · PgCert Medical Ultrasound
+</div>
+
+<div>
+MSK Ultrasound Teaching Resource
+</div>
+
+</div>
+
+</footer>
+
+
+<script>
+
+
+/* =========================================================
+PASSWORD
+
+CHANGE THIS IF REQUIRED
+========================================================= */
+
+const SITE_PASSWORD =
+  "MSK2026";
+
+
+/* =========================================================
+PASSWORD LOGIC
+========================================================= */
+
+const body =
+  document.body;
+
+const gate =
+  document.getElementById(
+    "passwordGate"
+  );
+
+const passwordForm =
+  document.getElementById(
+    "passwordForm"
+  );
+
+const passwordInput =
+  document.getElementById(
+    "sitePassword"
+  );
+
+const passwordError =
+  document.getElementById(
+    "passwordError"
+  );
+
+
+passwordForm.addEventListener(
+  "submit",
+
+  function(event){
+
+    event.preventDefault();
+
+
+    if(
+      passwordInput.value
+      ===
+      SITE_PASSWORD
+    ){
+
+      passwordError.textContent =
+        "";
+
+      body.classList.remove(
+        "locked"
+      );
+
+      gate.remove();
+
+    }
+
+    else{
+
+      passwordError.textContent =
+        "Incorrect password.";
+
+      passwordInput.select();
+
+      passwordInput.focus();
+
+    }
+
+  }
+
+);
+
+
+/* =========================================================
+IMAGE BANK
+
+ADD ALL NEW CASES IN THIS SECTION
+========================================================= */
+
+const cases = [
+
+{
+
+  id:
+    "case-01",
+
+  title:
+    "3rd/4th Webspace",
+
+  region:
+    "Forefoot",
+
+  difficulty:
+    "Intermediate",
+
+  tags:[
+    "Foot",
+    "Nerve",
+    "Webspace"
+  ],
+
+  history:
+    "Patient presenting with plantar forefoot symptoms centred around the 3rd and 4th metatarsal heads, with a sensation described as walking on a small stone.",
+
+  question:
+    "What structures and abnormality can you identify on the unannotated image?",
+
+  plain:
+    "images/case-01-plain.png",
+
+  annotated:
+    "images/case-01-annotated.jpg",
+
+  diagnosis:
+    "Interdigital nerve abnormality within the 3rd/4th webspace.",
+
+  teachingNote:
+    "Use the annotated image to follow the course of the interdigital nerve and correlate the measured abnormality with the surrounding webspace structures."
+
+}
+
+
+/*
+
+=========================================================
+EXAMPLE CASE 2
+=========================================================
+
+Add a comma after the closing } of Case 1 and paste:
+
+,{
+  id:"case-02",
+
+  title:"Insertional Achilles",
+
+  region:"Posterior ankle",
+
+  difficulty:"Intermediate",
+
+  tags:[
+    "Ankle",
+    "Tendon",
+    "Achilles"
+  ],
+
+  history:
+    "Patient with posterior heel pain aggravated by loading and activity.",
+
+  question:
+    "What sonographic abnormalities can you identify?",
+
+  plain:
+    "images/case-02-plain.jpg",
+
+  annotated:
+    "images/case-02-annotated.jpg",
+
+  diagnosis:
+    "Insertional Achilles tendinopathy.",
+
+  teachingNote:
+    "Look for tendon thickening, altered echotexture and associated insertional changes."
+}
+
+=========================================================
+
+*/
+
+];
+
+
+/* =========================================================
+PAGE ELEMENTS
+========================================================= */
+
+const libraryView =
+  document.getElementById(
+    "libraryView"
+  );
+
+const caseView =
+  document.getElementById(
+    "caseView"
+  );
+
+const caseGrid =
+  document.getElementById(
+    "caseGrid"
+  );
+
+const caseContent =
+  document.getElementById(
+    "caseContent"
+  );
+
+const progressCopy =
+  document.getElementById(
+    "progressCopy"
+  );
+
+const progressFill =
+  document.getElementById(
+    "progressFill"
+  );
+
+const startButton =
+  document.getElementById(
+    "startButton"
+  );
+
+const backToLibrary =
+  document.getElementById(
+    "backToLibrary"
+  );
+
+let activeIndex =
+  0;
+
+
+/* =========================================================
+BUILD IMAGE BANK
+========================================================= */
+
+function renderLibrary(){
+
+  caseGrid.innerHTML =
+    "";
+
+
+  cases.forEach(
+    (caseItem,index)=>{
+
+      const card =
+        document.createElement(
+          "button"
+        );
+
+      card.type =
+        "button";
+
+      card.className =
+        "library-card";
+
+
+      const tags =
+        caseItem.tags
+        .map(
+          tag =>
+            `<span class="tag">${escapeHtml(tag)}</span>`
+        )
+        .join("");
+
+
+      card.innerHTML =
+      `
+
+      <div class="library-card-number">
+        Case ${index + 1}
+      </div>
+
+      <h4>
+        ${escapeHtml(caseItem.title)}
+      </h4>
+
+      <p>
+        ${escapeHtml(caseItem.region)}
+      </p>
+
+      <div class="tag-row">
+
+        <span class="tag difficulty">
+          ${escapeHtml(caseItem.difficulty)}
+        </span>
+
+        ${tags}
+
+      </div>
+
+      `;
+
+
+      card.addEventListener(
+        "click",
+        ()=>openCase(index)
+      );
+
+
+      caseGrid.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+OPEN CASE
+========================================================= */
+
+function openCase(index){
+
+  activeIndex =
+    index;
+
+  libraryView.style.display =
+    "none";
+
+  caseView.style.display =
+    "block";
+
+  renderCase();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+RETURN TO LIBRARY
+========================================================= */
+
+function showLibrary(){
+
+  caseView.style.display =
+    "none";
+
+  libraryView.style.display =
+    "block";
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+RENDER CASE
+========================================================= */
+
+function renderCase(){
+
+  const c =
+    cases[activeIndex];
+
+
+  const percentage =
+    (
+      (activeIndex + 1)
+      /
+      cases.length
+    )
+    *
+    100;
+
+
+  progressCopy.textContent =
+    `Case ${activeIndex + 1} of ${cases.length}`;
+
+
+  progressFill.style.width =
+    percentage + "%";
+
+
+  const tags =
+    c.tags
+    .map(
+      tag =>
+        `<span class="tag">${escapeHtml(tag)}</span>`
+    )
+    .join("");
+
+
+  caseContent.innerHTML =
+  `
+
+  <div class="case-heading">
+
+    <div>
+
+      <div class="case-number">
+        Case ${activeIndex + 1}
+      </div>
+
+      <h2>
+        ${escapeHtml(c.title)}
+      </h2>
+
+      <p>
+        ${escapeHtml(c.region)}
+      </p>
+
+      <div class="tag-row">
+
+        <span class="tag difficulty">
+          ${escapeHtml(c.difficulty)}
+        </span>
+
+        ${tags}
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="history-box">
+
+    <div class="history-icon">
+      Hx
+    </div>
+
+    <div>
+
+      <strong>
+        Clinical history
+      </strong>
+
+      <p>
+        ${escapeHtml(c.history)}
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="challenge">
+
+    <div class="challenge-label">
+      Image challenge
+    </div>
+
+    <h3>
+      ${escapeHtml(c.question)}
+    </h3>
+
+  </div>
+
+
+  <div class="viewer-frame">
+
+
+    <div
+      class="compare"
+      id="compare"
+      aria-label="Interactive ultrasound comparison"
+    >
+
+
+      <img
+        src="${c.plain}"
+        alt="Unannotated ultrasound image"
+        draggable="false"
+      >
+
+
+      <div
+        class="after-wrap"
+        id="afterWrap"
+      >
+
+        <img
+          src="${c.annotated}"
+          alt="Annotated ultrasound image"
+          id="afterImg"
+          draggable="false"
+        >
+
+      </div>
+
+
+      <div
+        class="divider"
+        id="divider"
+      >
+      </div>
+
+
+      <div
+        class="knob"
+        id="knob"
+      >
+        ‹ DRAG ›
+      </div>
+
+
+      <div class="image-label left">
+        UNANNOTATED
+      </div>
+
+
+      <div class="image-label right">
+        ANNOTATED
+      </div>
+
+
+    </div>
+
+
+    <div class="slider-help">
+      ← Drag across the image to reveal the annotation →
+    </div>
+
+
+  </div>
+
+
+  <div class="range-row">
+
+    <span>
+      Plain
+    </span>
+
+    <input
+      id="range"
+      type="range"
+      min="0"
+      max="100"
+      value="0"
+      aria-label="Reveal annotated image"
+    >
+
+    <span>
+      Annotated
+    </span>
+
+  </div>
+
+
+  <div class="viewer-actions">
+
+    <button
+      type="button"
+      class="secondary-button"
+      id="resetButton"
+    >
+      ↺ Reset image
+    </button>
+
+    <button
+      type="button"
+      class="secondary-button"
+      id="annotatedButton"
+    >
+      Reveal full annotation
+    </button>
+
+  </div>
+
+
+  <div class="reveal-section">
+
+
+    <div class="reveal-card">
+
+      <div class="reveal-card-title">
+
+        <h4>
+          Diagnosis
+        </h4>
+
+        <button
+          type="button"
+          class="reveal-button"
+          id="diagnosisButton"
+        >
+          Reveal
+        </button>
+
+      </div>
+
+      <div
+        class="reveal-content"
+        id="diagnosisContent"
+      >
+
+        <strong>
+          ${escapeHtml(c.diagnosis)}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="reveal-card">
+
+      <div class="reveal-card-title">
+
+        <h4>
+          Teaching point
+        </h4>
+
+        <button
+          type="button"
+          class="reveal-button"
+          id="teachingButton"
+        >
+          Reveal
+        </button>
+
+      </div>
+
+      <div
+        class="reveal-content"
+        id="teachingContent"
+      >
+
+        ${escapeHtml(c.teachingNote)}
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="case-nav">
+
+    <button
+      type="button"
+      class="secondary-button"
+      id="libraryButton"
+    >
+      ☰ Image Bank
+    </button>
+
+
+    <div class="case-nav-right">
+
+
+      <button
+        type="button"
+        class="secondary-button"
+        id="previousButton"
+      >
+        ← Previous
+      </button>
+
+
+      <button
+        type="button"
+        class="primary-button"
+        id="nextButton"
+      >
+        Next →
+      </button>
+
+
+    </div>
+
+  </div>
+
+  `;
+
+
+  setupSlider();
+
+  setupRevealButtons();
+
+  setupNavigation();
+
+}
+
+
+/* =========================================================
+SLIDER
+========================================================= */
+
+function setupSlider(){
+
+  const compare =
+    document.getElementById(
+      "compare"
+    );
+
+  const range =
+    document.getElementById(
+      "range"
+    );
+
+  const afterWrap =
+    document.getElementById(
+      "afterWrap"
+    );
+
+  const afterImg =
+    document.getElementById(
+      "afterImg"
+    );
+
+  const divider =
+    document.getElementById(
+      "divider"
+    );
+
+  const knob =
+    document.getElementById(
+      "knob"
+    );
+
+  const resetButton =
+    document.getElementById(
+      "resetButton"
+    );
+
+  const annotatedButton =
+    document.getElementById(
+      "annotatedButton"
+    );
+
+
+  let currentValue =
+    0;
+
+  let pendingValue =
+    0;
+
+  let animationFrame =
+    0;
+
+
+  function syncImageSize(){
+
+    const rect =
+      compare.getBoundingClientRect();
+
+
+    afterImg.style.width =
+      rect.width
+      +
+      "px";
+
+
+    afterImg.style.height =
+      rect.height
+      +
+      "px";
+
+  }
+
+
+  function paint(){
+
+    animationFrame =
+      0;
+
+
+    const value =
+      pendingValue;
+
+
+    currentValue =
+      value;
+
+
+    range.value =
+      value;
+
+
+    afterWrap.style.width =
+      value
+      +
+      "%";
+
+
+    divider.style.left =
+      value
+      +
+      "%";
+
+
+    knob.style.left =
+      value
+      +
+      "%";
+
+  }
+
+
+  function setSlider(value){
+
+    pendingValue =
+      Math.max(
+        0,
+        Math.min(
+          100,
+          Number(value)
+        )
+      );
+
+
+    if(
+      !animationFrame
+    ){
+
+      animationFrame =
+        requestAnimationFrame(
+          paint
+        );
+
+    }
+
+  }
+
+
+  function pointerPosition(clientX){
+
+    const rect =
+      compare.getBoundingClientRect();
+
+
+    return (
+
+      (
+        clientX
+        -
+        rect.left
+      )
+
+      /
+
+      rect.width
+
+    )
+
+    *
+
+    100;
+
+  }
+
+
+  syncImageSize();
+
+  setSlider(0);
+
+
+  window.addEventListener(
+    "resize",
+    ()=>{
+
+      syncImageSize();
+
+      setSlider(
+        currentValue
+      );
+
+    }
+  );
+
+
+  range.addEventListener(
+    "input",
+    event =>{
+
+      setSlider(
+        event.target.value
+      );
+
+    }
+  );
+
+
+  compare.addEventListener(
+    "selectstart",
+    event =>
+      event.preventDefault()
+  );
+
+
+  compare.addEventListener(
+    "dragstart",
+    event =>
+      event.preventDefault()
+  );
+
+
+  let dragging =
+    false;
+
+
+  compare.addEventListener(
+    "pointerdown",
+    event =>{
+
+      event.preventDefault();
+
+
+      if(
+        event.pointerType
+        ===
+        "mouse"
+
+        &&
+
+        event.button
+        !==
+        0
+      ){
+
+        return;
+
+      }
+
+
+      dragging =
+        true;
+
+
+      compare.setPointerCapture(
+        event.pointerId
+      );
+
+
+      setSlider(
+        pointerPosition(
+          event.clientX
+        )
+      );
+
+    }
+  );
+
+
+  compare.addEventListener(
+    "pointermove",
+    event =>{
+
+
+      if(
+        !dragging
+      ){
+
+        return;
+
+      }
+
+
+      if(
+        event.pointerType
+        !==
+        "touch"
+      ){
+
+        event.preventDefault();
+
+      }
+
+
+      setSlider(
+        pointerPosition(
+          event.clientX
+        )
+      );
+
+    }
+  );
+
+
+  compare.addEventListener(
+    "pointerup",
+    event =>{
+
+      dragging =
+        false;
+
+
+      try{
+
+        compare.releasePointerCapture(
+          event.pointerId
+        );
+
+      }
+
+      catch(_){}
+
+    }
+  );
+
+
+  compare.addEventListener(
+    "pointercancel",
+    event =>{
+
+      dragging =
+        false;
+
+
+      try{
+
+        compare.releasePointerCapture(
+          event.pointerId
+        );
+
+      }
+
+      catch(_){}
+
+    }
+  );
+
+
+  resetButton.addEventListener(
+    "click",
+    ()=>setSlider(0)
+  );
+
+
+  annotatedButton.addEventListener(
+    "click",
+    ()=>setSlider(100)
+  );
+
+}
+
+
+/* =========================================================
+REVEAL PANELS
+========================================================= */
+
+function setupRevealButtons(){
+
+  setupReveal(
+    "diagnosisButton",
+    "diagnosisContent"
+  );
+
+
+  setupReveal(
+    "teachingButton",
+    "teachingContent"
+  );
+
+}
+
+
+function setupReveal(
+  buttonId,
+  contentId
+){
+
+  const button =
+    document.getElementById(
+      buttonId
+    );
+
+  const content =
+    document.getElementById(
+      contentId
+    );
+
+
+  button.addEventListener(
+    "click",
+    ()=>{
+
+      const open =
+        content.style.display
+        ===
+        "block";
+
+
+      content.style.display =
+        open
+          ?
+          "none"
+          :
+          "block";
+
+
+      button.textContent =
+        open
+          ?
+          "Reveal"
+          :
+          "Hide";
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+CASE NAVIGATION
+========================================================= */
+
+function setupNavigation(){
+
+  const libraryButton =
+    document.getElementById(
+      "libraryButton"
+    );
+
+  const previousButton =
+    document.getElementById(
+      "previousButton"
+    );
+
+  const nextButton =
+    document.getElementById(
+      "nextButton"
+    );
+
+
+  libraryButton.addEventListener(
+    "click",
+    showLibrary
+  );
+
+
+  if(
+    activeIndex
+    ===
+    0
+  ){
+
+    previousButton.disabled =
+      true;
+
+    previousButton.style.opacity =
+      ".4";
+
+    previousButton.style.cursor =
+      "not-allowed";
+
+  }
+
+  else{
+
+    previousButton.addEventListener(
+      "click",
+      ()=>openCase(
+        activeIndex - 1
+      )
+    );
+
+  }
+
+
+  if(
+    activeIndex
+    >=
+    cases.length - 1
+  ){
+
+    nextButton.textContent =
+      "Back to Image Bank";
+
+    nextButton.addEventListener(
+      "click",
+      showLibrary
+    );
+
+  }
+
+  else{
+
+    nextButton.addEventListener(
+      "click",
+      ()=>openCase(
+        activeIndex + 1
+      )
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+BUTTON EVENTS
+========================================================= */
+
+startButton.addEventListener(
+  "click",
+  ()=>openCase(0)
+);
+
+
+backToLibrary.addEventListener(
+  "click",
+  showLibrary
+);
+
+
+/* =========================================================
+SAFE TEXT
+========================================================= */
+
+function escapeHtml(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /[&<>"']/g,
+
+    character =>
+    ({
+
+      "&":"&amp;",
+
+      "<":"&lt;",
+
+      ">":"&gt;",
+
+      '"':"&quot;",
+
+      "'":"&#39;"
+
+    })[
+      character
+    ]
+
+  );
+
+}
+
+
+/* =========================================================
+START
+========================================================= */
+
+renderLibrary();
+
+</script>
+
+</body>
+
+</html>
   --bg:#0b0d10;
   --panel:#14181d;
   --panel2:#1b2027;
