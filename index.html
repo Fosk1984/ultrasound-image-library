@@ -29,41 +29,58 @@
   box-sizing:border-box;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
+
   font-family:
     Inter,
     system-ui,
     -apple-system,
-    Segoe UI,
+    BlinkMacSystemFont,
+    "Segoe UI",
     Roboto,
     Arial,
     sans-serif;
 
   background:var(--bg);
+
   color:var(--text);
 }
 
 
 
-/* PASSWORD SCREEN */
+/* =========================================================
+PASSWORD SCREEN
+========================================================= */
 
 .gate{
+
   position:fixed;
+
   inset:0;
 
   z-index:9999;
 
   display:grid;
+
   place-items:center;
 
   padding:24px;
 
   background:#0b0d10;
+
 }
 
 .gate-card{
-  width:min(440px,100%);
+
+  width:min(
+    440px,
+    100%
+  );
 
   background:#14181d;
 
@@ -73,37 +90,71 @@ body{
 
   border-radius:16px;
 
-  padding:24px;
+  padding:26px;
 
   box-shadow:
     0 20px 60px
-    rgba(0,0,0,.35);
+    rgba(
+      0,
+      0,
+      0,
+      .45
+    );
+
+}
+
+.gate-logo{
+
+  display:block;
+
+  max-width:170px;
+
+  max-height:70px;
+
+  width:auto;
+
+  height:auto;
+
+  margin:
+    0 auto
+    24px;
+
+  object-fit:contain;
+
 }
 
 .gate-card h2{
-  margin:0 0 8px;
+
+  margin:
+    0 0 8px;
 
   font-size:26px;
+
 }
 
 .gate-card p{
-  margin:
-    0 0 18px;
 
-  color:#aeb7c2;
+  margin:
+    0 0 20px;
+
+  color:var(--muted);
 
   line-height:1.5;
+
 }
 
 .gate-card label{
+
   display:block;
 
   margin-bottom:7px;
 
   font-weight:700;
+
 }
 
 .gate-card input{
+
   width:100%;
 
   min-height:48px;
@@ -124,17 +175,27 @@ body{
   font-size:16px;
 
   outline:none;
+
 }
 
 .gate-card input:focus{
-  border-color:#73b7ff;
+
+  border-color:
+    var(--accent);
 
   box-shadow:
     0 0 0 3px
-    rgba(115,183,255,.18);
+    rgba(
+      115,
+      183,
+      255,
+      .18
+    );
+
 }
 
 .gate-card button{
+
   width:100%;
 
   min-height:48px;
@@ -145,7 +206,8 @@ body{
 
   border-radius:10px;
 
-  background:#73b7ff;
+  background:
+    var(--accent);
 
   color:#07111d;
 
@@ -154,9 +216,17 @@ body{
   font-size:16px;
 
   cursor:pointer;
+
+}
+
+.gate-card button:hover{
+
+  filter:brightness(1.08);
+
 }
 
 .gate-error{
+
   min-height:22px;
 
   margin-top:10px;
@@ -164,22 +234,27 @@ body{
   color:#ffb4b4;
 
   font-size:14px;
+
 }
 
 body.locked > header,
 body.locked > main,
 body.locked > footer{
+
   visibility:hidden;
+
 }
 
 
 
-/* MAIN PAGE */
+/* =========================================================
+HEADER
+========================================================= */
 
 header{
+
   padding:
-    28px 18px
-    18px;
+    24px 18px;
 
   border-bottom:
     1px solid
@@ -191,43 +266,107 @@ header{
       #10141a 0%,
       #0b0d10 100%
     );
+
 }
 
 .wrap{
-  max-width:var(--max);
-  margin:0 auto;
+
+  max-width:
+    var(--max);
+
+  margin:
+    0 auto;
+
+}
+
+.header-content{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:
+    space-between;
+
+  gap:34px;
+
+}
+
+.header-text{
+
+  flex:1;
+
+  min-width:0;
+
 }
 
 h1{
-  margin:0 0 8px;
+
+  margin:
+    0 0 8px;
 
   font-size:
     clamp(
-      24px,
+      25px,
       4vw,
-      38px
+      39px
     );
+
+  line-height:1.1;
+
 }
 
 .sub{
+
   margin:0;
 
-  color:var(--muted);
+  color:
+    var(--muted);
 
   line-height:1.5;
+
+  max-width:760px;
+
 }
+
+.keele-logo{
+
+  display:block;
+
+  width:190px;
+
+  max-width:28%;
+
+  max-height:80px;
+
+  height:auto;
+
+  object-fit:contain;
+
+}
+
+
+
+/* =========================================================
+MAIN PAGE
+========================================================= */
 
 main{
+
   padding:
-    22px 18px
-    40px;
+    24px 18px
+    42px;
+
 }
 
 
 
-/* CASE BUTTONS */
+/* =========================================================
+CASE SELECTOR
+========================================================= */
 
 .case-tabs{
+
   display:flex;
 
   gap:10px;
@@ -236,34 +375,46 @@ main{
 
   margin:
     0 0 18px;
+
 }
 
 .case-tab{
+
   appearance:none;
 
   border:
     1px solid
     var(--line);
 
-  background:var(--panel);
+  background:
+    var(--panel);
 
-  color:var(--text);
+  color:
+    var(--text);
 
   border-radius:999px;
 
   padding:
-    10px 14px;
+    10px 15px;
 
   font-size:15px;
 
   cursor:pointer;
 
   min-height:44px;
+
+}
+
+.case-tab:hover{
+
+  border-color:#526171;
+
 }
 
 .case-tab[
   aria-selected="true"
 ]{
+
   border-color:
     var(--accent);
 
@@ -276,13 +427,17 @@ main{
       .15
     )
     inset;
+
 }
 
 
 
-/* CASE CARD */
+/* =========================================================
+CASE CARD
+========================================================= */
 
 .card{
+
   background:
     var(--panel);
 
@@ -293,9 +448,11 @@ main{
   border-radius:16px;
 
   padding:18px;
+
 }
 
 .case-head{
+
   display:grid;
 
   grid-template-columns:
@@ -306,24 +463,31 @@ main{
   align-items:start;
 
   margin-bottom:14px;
+
 }
 
 .case-head h2{
+
   margin:
     0 0 6px;
 
   font-size:24px;
+
 }
 
 .meta{
-  color:var(--muted);
+
+  color:
+    var(--muted);
 
   margin:0;
 
   line-height:1.45;
+
 }
 
 .badge{
+
   border:
     1px solid
     var(--line);
@@ -336,16 +500,21 @@ main{
   padding:
     8px 11px;
 
-  color:var(--muted);
+  color:
+    var(--muted);
 
   white-space:nowrap;
+
 }
 
 
 
-/* IMAGE COMPARATOR */
+/* =========================================================
+IMAGE COMPARATOR
+========================================================= */
 
 .compare{
+
   position:relative;
 
   width:100%;
@@ -376,9 +545,11 @@ main{
   -webkit-touch-callout:none;
 
   cursor:ew-resize;
+
 }
 
 .compare img{
+
   position:absolute;
 
   inset:0;
@@ -391,19 +562,28 @@ main{
 
   user-select:none;
 
+  -webkit-user-select:none;
+
   -webkit-user-drag:none;
+
+  pointer-events:none;
 
   backface-visibility:hidden;
 
   transform:
     translateZ(0);
+
 }
 
 .after-wrap{
+
   position:absolute;
 
-  inset:
-    0 auto 0 0;
+  top:0;
+
+  bottom:0;
+
+  left:0;
 
   width:50%;
 
@@ -414,20 +594,18 @@ main{
   will-change:width;
 
   contain:paint;
+
 }
 
 .after-wrap img{
+
   position:absolute;
 
   top:0;
 
   left:0;
 
-  width:100%;
-
   max-width:none;
-
-  height:100%;
 
   object-fit:contain;
 
@@ -438,15 +616,19 @@ main{
 
   user-select:none;
 
+  -webkit-user-select:none;
+
   -webkit-user-drag:none;
 
   transform:
     translateZ(0);
 
   backface-visibility:hidden;
+
 }
 
 .divider{
+
   position:absolute;
 
   top:0;
@@ -464,12 +646,19 @@ main{
 
   box-shadow:
     0 0 8px
-    rgba(0,0,0,.75);
+    rgba(
+      0,
+      0,
+      0,
+      .75
+    );
 
   pointer-events:none;
+
 }
 
 .knob{
+
   position:absolute;
 
   left:50%;
@@ -482,9 +671,9 @@ main{
       -50%
     );
 
-  width:48px;
+  width:50px;
 
-  height:48px;
+  height:50px;
 
   border-radius:50%;
 
@@ -498,14 +687,23 @@ main{
 
   font-weight:800;
 
+  font-size:20px;
+
   box-shadow:
     0 3px 16px
-    rgba(0,0,0,.4);
+    rgba(
+      0,
+      0,
+      0,
+      .4
+    );
 
   pointer-events:none;
+
 }
 
 .labels{
+
   position:absolute;
 
   left:12px;
@@ -527,24 +725,40 @@ main{
 
   text-shadow:
     0 2px 4px
-    rgba(0,0,0,.9);
+    rgba(
+      0,
+      0,
+      0,
+      .9
+    );
+
 }
 
 .labels span{
+
   background:
-    rgba(0,0,0,.55);
+    rgba(
+      0,
+      0,
+      0,
+      .58
+    );
 
   padding:
-    6px 8px;
+    6px 9px;
 
   border-radius:7px;
+
 }
 
 
 
-/* RANGE SLIDER */
+/* =========================================================
+RANGE SLIDER
+========================================================= */
 
 .range-row{
+
   display:grid;
 
   grid-template-columns:
@@ -556,30 +770,43 @@ main{
 
   margin:
     14px 0 0;
+
 }
 
-input[type=range]{
+input[
+  type=range
+]{
+
   width:100%;
 
   min-height:44px;
+
+  cursor:pointer;
+
 }
 
 .pct{
+
   font-variant-numeric:
     tabular-nums;
 
-  color:var(--muted);
+  color:
+    var(--muted);
 
   min-width:46px;
 
   text-align:right;
+
 }
 
 
 
-/* BUTTONS */
+/* =========================================================
+BUTTONS
+========================================================= */
 
 .actions{
+
   display:flex;
 
   gap:10px;
@@ -587,9 +814,11 @@ input[type=range]{
   flex-wrap:wrap;
 
   margin-top:14px;
+
 }
 
 button.action{
+
   appearance:none;
 
   border:
@@ -599,7 +828,8 @@ button.action{
   background:
     var(--panel2);
 
-  color:var(--text);
+  color:
+    var(--text);
 
   border-radius:10px;
 
@@ -611,22 +841,28 @@ button.action{
   font-size:15px;
 
   cursor:pointer;
+
 }
 
 button.action:hover{
+
   border-color:
-    #495563;
+    #526171;
+
 }
 
 
 
-/* TEACHING PROMPT */
+/* =========================================================
+TEACHING PROMPT
+========================================================= */
 
 .prompt{
-  margin-top:16px;
+
+  margin-top:18px;
 
   padding:
-    14px 16px;
+    15px 16px;
 
   background:
     var(--panel2);
@@ -637,16 +873,22 @@ button.action:hover{
 
   border-radius:12px;
 
-  line-height:1.5;
+  line-height:1.55;
+
 }
 
 .prompt strong{
+
   display:block;
 
-  margin-bottom:5px;
+  margin-bottom:6px;
+
+  font-size:16px;
+
 }
 
 .answer{
+
   display:none;
 
   margin-top:12px;
@@ -669,43 +911,84 @@ button.action:hover{
   border-radius:8px;
 
   line-height:1.5;
+
 }
 
 
 
-/* FOOTER */
+/* =========================================================
+FOOTER
+========================================================= */
 
 footer{
-  max-width:var(--max);
 
-  margin:0 auto;
+  max-width:
+    var(--max);
+
+  margin:
+    0 auto;
 
   padding:
-    0 18px 36px;
+    0 18px
+    36px;
 
-  color:var(--muted);
+  color:
+    var(--muted);
 
   font-size:13px;
+
 }
 
 
 
-/* MOBILE */
+/* =========================================================
+MOBILE
+========================================================= */
 
 @media(
   max-width:650px
 ){
 
+  .header-content{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+  }
+
+  .keele-logo{
+
+    width:150px;
+
+    max-width:60%;
+
+  }
+
   .case-head{
+
     grid-template-columns:1fr;
+
   }
 
   .badge{
+
     justify-self:start;
+
   }
 
   .card{
+
     padding:12px;
+
+  }
+
+  .labels{
+
+    font-size:12px;
+
   }
 
 }
@@ -715,10 +998,14 @@ footer{
 </head>
 
 
+
 <body class="locked">
 
 
-<!-- PASSWORD SCREEN -->
+
+<!-- ======================================================
+PASSWORD SCREEN
+====================================================== -->
 
 <div
   class="gate"
@@ -730,19 +1017,29 @@ footer{
   id="passwordForm"
 >
 
+<img
+  src="images/keele-logo.png"
+  alt="Keele University"
+  class="gate-logo"
+>
+
+
 <h2>
 Student Access
 </h2>
 
+
 <p>
 Enter the password supplied by your tutor to access this MSK ultrasound teaching resource.
 </p>
+
 
 <label
   for="sitePassword"
 >
 Password
 </label>
+
 
 <input
   id="sitePassword"
@@ -751,11 +1048,13 @@ Password
   required
 >
 
+
 <button
   type="submit"
 >
 Open Resource
 </button>
+
 
 <div
   class="gate-error"
@@ -764,32 +1063,59 @@ Open Resource
 >
 </div>
 
+
 </form>
 
 </div>
 
 
 
-<!-- MAIN WEBSITE -->
+<!-- ======================================================
+HEADER
+====================================================== -->
 
 <header>
 
-<div class="wrap">
+<div
+  class="wrap header-content"
+>
+
+
+<div class="header-text">
+
 
 <h1>
 MSK Ultrasound Image Comparisons
 </h1>
 
+
 <p class="sub">
-Choose a case, then drag the slider to compare the unannotated image with the annotated teaching image.
+Choose a case, then drag the slider to compare the unannotated ultrasound image with the annotated teaching image.
 </p>
+
+
+</div>
+
+
+<img
+  src="images/keele-logo.png"
+  alt="Keele University"
+  class="keele-logo"
+>
+
 
 </div>
 
 </header>
 
 
+
+<!-- ======================================================
+MAIN CONTENT
+====================================================== -->
+
 <main class="wrap">
+
 
 <div
   id="tabs"
@@ -807,7 +1133,9 @@ Choose a case, then drag the slider to compare the unannotated image with the an
 >
 </section>
 
+
 </main>
+
 
 
 <footer>
@@ -820,41 +1148,50 @@ MSK Ultrasound Teaching Resource
 
 <script>
 
+
+
 /* =========================================================
 PASSWORD
 
-CHANGE THIS TO WHATEVER PASSWORD YOU WANT
+CHANGE THIS PASSWORD IF YOU WANT
 ========================================================= */
 
 const SITE_PASSWORD =
-  "KEELE2026";
+  "MSK2026";
 
 
 
-/* PASSWORD LOGIC */
+/* =========================================================
+PASSWORD LOGIC
+========================================================= */
 
 const body =
   document.body;
+
 
 const gate =
   document.getElementById(
     "passwordGate"
   );
 
+
 const passwordForm =
   document.getElementById(
     "passwordForm"
   );
+
 
 const passwordInput =
   document.getElementById(
     "sitePassword"
   );
 
+
 const passwordError =
   document.getElementById(
     "passwordError"
   );
+
 
 
 passwordForm.addEventListener(
@@ -863,6 +1200,7 @@ passwordForm.addEventListener(
   function(e){
 
     e.preventDefault();
+
 
     if(
       passwordInput.value
@@ -873,20 +1211,25 @@ passwordForm.addEventListener(
       passwordError.textContent =
         "";
 
+
       body.classList.remove(
         "locked"
       );
 
+
       gate.remove();
 
     }
+
 
     else{
 
       passwordError.textContent =
         "Incorrect password.";
 
+
       passwordInput.select();
+
 
       passwordInput.focus();
 
@@ -899,12 +1242,10 @@ passwordForm.addEventListener(
 
 
 /* =========================================================
-YOUR ULTRASOUND CASES
+ULTRASOUND CASES
 
-THIS IS THE ONLY SECTION YOU WILL NEED TO EDIT WHEN
-ADDING MORE CASES
+ADD NEW CASES HERE
 ========================================================= */
-
 
 const cases = [
 
@@ -913,20 +1254,26 @@ const cases = [
   id:
     "case-01",
 
+
   title:
     "Case 1 — 3rd/4th webspace",
+
 
   subtitle:
     "Interdigital region",
 
+
   plain:
     "images/case-01-plain.png",
+
 
   annotated:
     "images/case-01-annotated.jpg",
 
+
   prompt:
     "Before revealing the annotations, identify the main structure or abnormality and describe its relationship to the surrounding tissues.",
+
 
   teachingNote:
     "Annotated image demonstrates the measured lesion in the 3rd/4th webspace and the course of the interdigital nerve marked by the red arrows."
@@ -936,15 +1283,21 @@ const cases = [
 
 /*
 
-WHEN YOU WANT CASE 2:
+=========================================================
 
-Put a comma after the closing } above and paste:
+WHEN YOU WANT TO ADD CASE 2
+
+Put a comma after the closing } above.
+
+Then paste something like this:
+
 
 ,{
-  id:"case-02",
+  id:
+    "case-02",
 
   title:
-    "Case 2 — Achilles",
+    "Case 2 — Achilles Tendon",
 
   subtitle:
     "Insertional Achilles",
@@ -959,8 +1312,11 @@ Put a comma after the closing } above and paste:
     "What abnormality can you identify?",
 
   teachingNote:
-    "Insert your explanation here."
+    "Insert your teaching explanation here."
 }
+
+
+=========================================================
 
 */
 
@@ -971,7 +1327,7 @@ Put a comma after the closing } above and paste:
 
 /* =========================================================
 SITE CODE
-YOU DON'T NEED TO EDIT ANYTHING BELOW HERE
+NO NEED TO EDIT BELOW HERE
 ========================================================= */
 
 
@@ -980,10 +1336,12 @@ const tabs =
     "tabs"
   );
 
+
 const viewer =
   document.getElementById(
     "viewer"
   );
+
 
 let activeIndex =
   0;
@@ -992,58 +1350,70 @@ let activeIndex =
 
 function renderTabs(){
 
-tabs.innerHTML =
-  "";
+  tabs.innerHTML =
+    "";
 
-cases.forEach(
-  (c,i)=>{
 
-    const button =
-      document.createElement(
-        "button"
+  cases.forEach(
+    (c,i)=>{
+
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.className =
+        "case-tab";
+
+
+      button.type =
+        "button";
+
+
+      button.setAttribute(
+        "role",
+        "tab"
       );
 
-    button.className =
-      "case-tab";
 
-    button.type =
-      "button";
+      button.setAttribute(
+        "aria-selected",
+        i === activeIndex
+          ? "true"
+          : "false"
+      );
 
-    button.setAttribute(
-      "role",
-      "tab"
-    );
 
-    button.setAttribute(
-      "aria-selected",
-      i === activeIndex
-      ? "true"
-      : "false"
-    );
+      button.textContent =
+        c.title;
 
-    button.textContent =
-      c.title;
 
-    button.addEventListener(
-      "click",
-      ()=>{
+      button.addEventListener(
+        "click",
+        ()=>{
 
-        activeIndex =
-          i;
 
-        renderTabs();
+          activeIndex =
+            i;
 
-        renderCase();
 
-      }
-    );
+          renderTabs();
 
-    tabs.appendChild(
-      button
-    );
 
-  }
-);
+          renderCase();
+
+        }
+      );
+
+
+      tabs.appendChild(
+        button
+      );
+
+    }
+  );
 
 }
 
@@ -1051,628 +1421,709 @@ cases.forEach(
 
 function renderCase(){
 
-const c =
-  cases[
-    activeIndex
-  ];
 
+  const c =
+    cases[
+      activeIndex
+    ];
 
-viewer.innerHTML =
-`
 
-<div class="case-head">
+  if(
+    !c
+  ){
 
-<div>
+    viewer.innerHTML =
+      "<p>No cases have been added yet.</p>";
 
-<h2>
-${escapeHtml(
-  c.title
-)}
-</h2>
+    return;
 
-<p class="meta">
-${escapeHtml(
-  c.subtitle
-)}
-</p>
+  }
 
-</div>
 
+  viewer.innerHTML =
+  `
 
-<div class="badge">
 
-${activeIndex + 1}
+  <div class="case-head">
 
-of
 
-${cases.length}
+    <div>
 
-</div>
 
-</div>
+      <h2>
+        ${escapeHtml(
+          c.title
+        )}
+      </h2>
 
 
+      <p class="meta">
+        ${escapeHtml(
+          c.subtitle
+        )}
+      </p>
 
-<div
-  class="compare"
-  id="compare"
->
 
+    </div>
 
-<img
-  src="${c.plain}"
-  alt="Unannotated ultrasound image"
-  draggable="false"
->
 
+    <div class="badge">
 
-<div
-  class="after-wrap"
-  id="afterWrap"
->
+      ${activeIndex + 1}
 
-<img
-  src="${c.annotated}"
-  alt="Annotated ultrasound image"
-  id="afterImg"
-  draggable="false"
->
+      of
 
-</div>
+      ${cases.length}
 
+    </div>
 
 
-<div
-  class="divider"
-  id="divider"
->
-</div>
+  </div>
 
 
 
-<div
-  class="knob"
-  id="knob"
->
+  <div
+    class="compare"
+    id="compare"
+    aria-label="Interactive ultrasound comparison"
+  >
 
-↔
 
-</div>
+    <img
+      src="${c.plain}"
+      alt="Unannotated ultrasound image"
+      draggable="false"
+    >
 
 
 
-<div class="labels">
+    <div
+      class="after-wrap"
+      id="afterWrap"
+    >
 
-<span>
-Unannotated
-</span>
 
-<span>
-Annotated
-</span>
+      <img
+        src="${c.annotated}"
+        alt="Annotated ultrasound image"
+        id="afterImg"
+        draggable="false"
+      >
 
-</div>
 
-</div>
+    </div>
 
 
 
-<div class="range-row">
+    <div
+      class="divider"
+      id="divider"
+    >
+    </div>
 
-<span>
-Plain
-</span>
 
 
-<input
-  id="range"
-  type="range"
-  min="0"
-  max="100"
-  value="50"
->
+    <div
+      class="knob"
+      id="knob"
+    >
+      ↔
+    </div>
 
 
-<span
-  class="pct"
-  id="pct"
->
-50%
-</span>
 
-</div>
+    <div class="labels">
 
 
+      <span>
+        Unannotated
+      </span>
 
-<div class="actions">
 
-<button
-  class="action"
-  id="reset"
-  type="button"
->
-Reset slider
-</button>
+      <span>
+        Annotated
+      </span>
 
 
-<button
-  class="action"
-  id="showPlain"
-  type="button"
->
-Show plain
-</button>
+    </div>
 
 
-<button
-  class="action"
-  id="showAnnotated"
-  type="button"
->
-Show annotated
-</button>
+  </div>
 
-</div>
 
 
+  <div class="range-row">
 
-<div class="prompt">
 
-<strong>
-Teaching prompt
-</strong>
+    <span>
+      Plain
+    </span>
 
-${escapeHtml(
-  c.prompt
-)}
 
+    <input
+      id="range"
+      type="range"
+      min="0"
+      max="100"
+      value="50"
+      aria-label="Move comparison slider"
+    >
 
-<div class="actions">
 
-<button
-  class="action"
-  id="reveal"
-  type="button"
->
+    <span
+      class="pct"
+      id="pct"
+    >
+      50%
+    </span>
 
-Reveal teaching note
 
-</button>
+  </div>
 
-</div>
 
 
-<div
-  class="answer"
-  id="answer"
->
+  <div class="actions">
 
-${escapeHtml(
-  c.teachingNote
-)}
 
-</div>
+    <button
+      class="action"
+      id="reset"
+      type="button"
+    >
+      Reset slider
+    </button>
 
-</div>
 
-`;
 
+    <button
+      class="action"
+      id="showPlain"
+      type="button"
+    >
+      Show plain
+    </button>
 
 
-const compare =
-  document.getElementById(
-    "compare"
-  );
 
+    <button
+      class="action"
+      id="showAnnotated"
+      type="button"
+    >
+      Show annotated
+    </button>
 
-const range =
-  document.getElementById(
-    "range"
-  );
 
+  </div>
 
-const afterWrap =
-  document.getElementById(
-    "afterWrap"
-  );
 
 
-const afterImg =
-  document.getElementById(
-    "afterImg"
-  );
+  <div class="prompt">
 
 
-const divider =
-  document.getElementById(
-    "divider"
-  );
+    <strong>
+      Teaching prompt
+    </strong>
 
 
-const knob =
-  document.getElementById(
-    "knob"
-  );
+    ${escapeHtml(
+      c.prompt
+    )}
 
 
-const pct =
-  document.getElementById(
-    "pct"
-  );
 
+    <div class="actions">
 
 
-let currentValue =
-  50;
+      <button
+        class="action"
+        id="reveal"
+        type="button"
+      >
 
-let pendingValue =
-  50;
+        Reveal teaching note
 
-let animationFrame =
-  0;
+      </button>
 
 
+    </div>
 
-function syncImageSize(){
 
-const rect =
-  compare.getBoundingClientRect();
 
-afterImg.style.width =
-  rect.width + "px";
+    <div
+      class="answer"
+      id="answer"
+    >
 
-afterImg.style.height =
-  rect.height + "px";
 
-}
+      ${escapeHtml(
+        c.teachingNote
+      )}
 
 
+    </div>
 
-function paint(){
 
-animationFrame =
-  0;
+  </div>
 
-const value =
-  pendingValue;
 
-currentValue =
-  value;
+  `;
 
-range.value =
-  value;
 
-afterWrap.style.width =
-  value + "%";
 
-divider.style.left =
-  value + "%";
+  const compare =
+    document.getElementById(
+      "compare"
+    );
 
-knob.style.left =
-  value + "%";
 
-pct.textContent =
-  Math.round(
-    value
-  )
-  +
-  "%";
+  const range =
+    document.getElementById(
+      "range"
+    );
 
-}
 
+  const afterWrap =
+    document.getElementById(
+      "afterWrap"
+    );
 
 
-function setSlider(
-  value
-){
+  const afterImg =
+    document.getElementById(
+      "afterImg"
+    );
 
-pendingValue =
-  Math.max(
-    0,
-    Math.min(
-      100,
-      Number(
+
+  const divider =
+    document.getElementById(
+      "divider"
+    );
+
+
+  const knob =
+    document.getElementById(
+      "knob"
+    );
+
+
+  const pct =
+    document.getElementById(
+      "pct"
+    );
+
+
+
+  let currentValue =
+    50;
+
+
+  let pendingValue =
+    50;
+
+
+  let animationFrame =
+    0;
+
+
+
+  function syncImageSize(){
+
+
+    const rect =
+      compare.getBoundingClientRect();
+
+
+    afterImg.style.width =
+      rect.width
+      +
+      "px";
+
+
+    afterImg.style.height =
+      rect.height
+      +
+      "px";
+
+  }
+
+
+
+  function paint(){
+
+
+    animationFrame =
+      0;
+
+
+    const value =
+      pendingValue;
+
+
+    currentValue =
+      value;
+
+
+    range.value =
+      value;
+
+
+    afterWrap.style.width =
+      value
+      +
+      "%";
+
+
+    divider.style.left =
+      value
+      +
+      "%";
+
+
+    knob.style.left =
+      value
+      +
+      "%";
+
+
+    pct.textContent =
+      Math.round(
         value
       )
-    )
+      +
+      "%";
+
+  }
+
+
+
+  function setSlider(
+    value
+  ){
+
+
+    pendingValue =
+      Math.max(
+        0,
+        Math.min(
+          100,
+          Number(
+            value
+          )
+        )
+      );
+
+
+    if(
+      !animationFrame
+    ){
+
+
+      animationFrame =
+        requestAnimationFrame(
+          paint
+        );
+
+    }
+
+  }
+
+
+
+  syncImageSize();
+
+
+
+  window.addEventListener(
+    "resize",
+    ()=>{
+
+
+      syncImageSize();
+
+
+      setSlider(
+        currentValue
+      );
+
+    }
   );
 
 
-if(
-  !animationFrame
-){
 
-animationFrame =
-  requestAnimationFrame(
-    paint
+  range.addEventListener(
+    "input",
+    e => {
+
+
+      setSlider(
+        e.target.value
+      );
+
+    }
   );
 
-}
-
-}
 
 
-
-syncImageSize();
-
-
-
-window.addEventListener(
-  "resize",
-  ()=>{
-
-    syncImageSize();
-
-    setSlider(
-      currentValue
-    );
-
-  }
-);
-
-
-
-range.addEventListener(
-  "input",
-  e => {
-
-    setSlider(
-      e.target.value
-    );
-
-  }
-);
-
-
-
-function pointerPosition(
-  clientX
-){
-
-const rect =
-  compare.getBoundingClientRect();
-
-return (
-
-  (
+  function pointerPosition(
     clientX
-    -
-    rect.left
-  )
-
-  /
-
-  rect.width
-
-)
-
-*
-
-100;
-
-}
+  ){
 
 
-
-let dragging =
-  false;
-
+    const rect =
+      compare.getBoundingClientRect();
 
 
-compare.addEventListener(
-  "selectstart",
-  e =>
-    e.preventDefault()
-);
+    return (
 
-
-
-compare.addEventListener(
-  "dragstart",
-  e =>
-    e.preventDefault()
-);
-
-
-
-compare.addEventListener(
-  "pointerdown",
-  e => {
-
-    e.preventDefault();
-
-
-    if(
-      e.pointerType
-      ===
-      "mouse"
-
-      &&
-
-      e.button
-      !==
-      0
-    ){
-
-      return;
-
-    }
-
-
-    dragging =
-      true;
-
-
-    compare.setPointerCapture(
-      e.pointerId
-    );
-
-
-    setSlider(
-      pointerPosition(
-        e.clientX
+      (
+        clientX
+        -
+        rect.left
       )
-    );
+
+      /
+
+      rect.width
+
+    )
+
+    *
+
+    100;
 
   }
-);
 
 
 
-compare.addEventListener(
-  "pointermove",
-  e => {
-
-    if(
-      !dragging
-    ){
-
-      return;
-
-    }
+  let dragging =
+    false;
 
 
-    if(
-      e.pointerType
-      !==
-      "touch"
-    ){
+
+  compare.addEventListener(
+    "selectstart",
+    e =>
+      e.preventDefault()
+  );
+
+
+
+  compare.addEventListener(
+    "dragstart",
+    e =>
+      e.preventDefault()
+  );
+
+
+
+  compare.addEventListener(
+    "pointerdown",
+    e => {
+
 
       e.preventDefault();
 
+
+      if(
+        e.pointerType
+        ===
+        "mouse"
+
+        &&
+
+        e.button
+        !==
+        0
+      ){
+
+        return;
+
+      }
+
+
+      dragging =
+        true;
+
+
+      compare.setPointerCapture(
+        e.pointerId
+      );
+
+
+      setSlider(
+        pointerPosition(
+          e.clientX
+        )
+      );
+
     }
+  );
 
 
-    setSlider(
-      pointerPosition(
-        e.clientX
-      )
+
+  compare.addEventListener(
+    "pointermove",
+    e => {
+
+
+      if(
+        !dragging
+      ){
+
+        return;
+
+      }
+
+
+      if(
+        e.pointerType
+        !==
+        "touch"
+      ){
+
+        e.preventDefault();
+
+      }
+
+
+      setSlider(
+        pointerPosition(
+          e.clientX
+        )
+      );
+
+    }
+  );
+
+
+
+  compare.addEventListener(
+    "pointerup",
+    e => {
+
+
+      dragging =
+        false;
+
+
+      try{
+
+
+        compare.releasePointerCapture(
+          e.pointerId
+        );
+
+
+      }
+
+      catch(_){}
+
+    }
+  );
+
+
+
+  compare.addEventListener(
+    "pointercancel",
+    e => {
+
+
+      dragging =
+        false;
+
+
+      try{
+
+
+        compare.releasePointerCapture(
+          e.pointerId
+        );
+
+
+      }
+
+      catch(_){}
+
+    }
+  );
+
+
+
+  document
+  .getElementById(
+    "reset"
+  )
+  .addEventListener(
+    "click",
+    ()=>setSlider(50)
+  );
+
+
+
+  document
+  .getElementById(
+    "showPlain"
+  )
+  .addEventListener(
+    "click",
+    ()=>setSlider(0)
+  );
+
+
+
+  document
+  .getElementById(
+    "showAnnotated"
+  )
+  .addEventListener(
+    "click",
+    ()=>setSlider(100)
+  );
+
+
+
+  const reveal =
+    document.getElementById(
+      "reveal"
     );
 
-  }
-);
+
+  const answer =
+    document.getElementById(
+      "answer"
+    );
 
 
 
-compare.addEventListener(
-  "pointerup",
-  e => {
-
-    dragging =
-      false;
+  reveal.addEventListener(
+    "click",
+    ()=>{
 
 
-    try{
-
-      compare.releasePointerCapture(
-        e.pointerId
-      );
-
-    }
-
-    catch(_){}
-
-  }
-);
+      const visible =
+        answer.style.display
+        ===
+        "block";
 
 
+      answer.style.display =
+        visible
+          ?
+          "none"
+          :
+          "block";
 
-compare.addEventListener(
-  "pointercancel",
-  e => {
 
-    dragging =
-      false;
-
-
-    try{
-
-      compare.releasePointerCapture(
-        e.pointerId
-      );
+      reveal.textContent =
+        visible
+          ?
+          "Reveal teaching note"
+          :
+          "Hide teaching note";
 
     }
-
-    catch(_){}
-
-  }
-);
-
-
-
-document
-.getElementById(
-  "reset"
-)
-.addEventListener(
-  "click",
-  ()=>setSlider(50)
-);
-
-
-
-document
-.getElementById(
-  "showPlain"
-)
-.addEventListener(
-  "click",
-  ()=>setSlider(0)
-);
-
-
-
-document
-.getElementById(
-  "showAnnotated"
-)
-.addEventListener(
-  "click",
-  ()=>setSlider(100)
-);
-
-
-
-const reveal =
-  document.getElementById(
-    "reveal"
   );
-
-
-const answer =
-  document.getElementById(
-    "answer"
-  );
-
-
-
-reveal.addEventListener(
-  "click",
-  ()=>{
-
-    const visible =
-      answer.style.display
-      ===
-      "block";
-
-
-    answer.style.display =
-      visible
-      ?
-      "none"
-      :
-      "block";
-
-
-    reveal.textContent =
-      visible
-      ?
-      "Reveal teaching note"
-      :
-      "Hide teaching note";
-
-  }
-);
 
 
 }
@@ -1683,35 +2134,36 @@ function escapeHtml(
   value
 ){
 
-return String(
-  value ?? ""
-)
-.replace(
-  /[&<>"']/g,
 
-  character =>
-  ({
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /[&<>"']/g,
 
-    "&":
-      "&amp;",
+    character =>
+    ({
 
-    "<":
-      "&lt;",
+      "&":
+        "&amp;",
 
-    ">":
-      "&gt;",
+      "<":
+        "&lt;",
 
-    '"':
-      "&quot;",
+      ">":
+        "&gt;",
 
-    "'":
-      "&#39;"
+      '"':
+        "&quot;",
 
-  })[
-    character
-  ]
+      "'":
+        "&#39;"
 
-);
+    })[
+      character
+    ]
+
+  );
 
 }
 
@@ -1719,9 +2171,12 @@ return String(
 
 renderTabs();
 
+
 renderCase();
 
+
 </script>
+
 
 </body>
 
