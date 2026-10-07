@@ -18,7 +18,6 @@ COLOURS
 ========================================================= */
 
 :root{
-
   --bg:#090c0b;
   --surface:#111613;
   --surface2:#171e1a;
@@ -29,14 +28,9 @@ COLOURS
   --border:#2b3630;
 
   --green:#8dc63f;
-  --green-dark:#639327;
   --green-soft:rgba(141,198,63,.12);
 
-  --amber:#efb84c;
-  --red:#e56f6f;
-
   --max:1180px;
-
 }
 
 
@@ -53,7 +47,6 @@ html{
 }
 
 body{
-
   margin:0;
 
   background:
@@ -75,7 +68,6 @@ body{
     Roboto,
     Arial,
     sans-serif;
-
 }
 
 button,
@@ -85,25 +77,17 @@ input{
 
 button:focus-visible,
 input:focus-visible{
-
-  outline:
-    3px solid
-    rgba(141,198,63,.45);
-
+  outline:3px solid rgba(141,198,63,.45);
   outline-offset:2px;
-
 }
 
 .wrap{
-
   width:min(
     calc(100% - 36px),
     var(--max)
   );
 
-  margin:
-    0 auto;
-
+  margin:0 auto;
 }
 
 
@@ -112,15 +96,11 @@ PASSWORD SCREEN
 ========================================================= */
 
 .gate{
-
   position:fixed;
-
   inset:0;
-
   z-index:9999;
 
   display:grid;
-
   place-items:center;
 
   padding:24px;
@@ -132,39 +112,27 @@ PASSWORD SCREEN
       transparent 35%
     ),
     #090c0b;
-
 }
 
 .gate-card{
-
-  width:min(
-    450px,
-    100%
-  );
+  width:min(450px,100%);
 
   padding:32px;
 
-  border:
-    1px solid
-    var(--border);
-
+  border:1px solid var(--border);
   border-radius:22px;
 
-  background:
-    rgba(17,22,19,.96);
+  background:rgba(17,22,19,.97);
 
   box-shadow:
     0 28px 80px
     rgba(0,0,0,.45);
-
 }
 
 .gate-logo{
-
   display:block;
 
   width:170px;
-
   max-height:80px;
 
   object-fit:contain;
@@ -172,110 +140,81 @@ PASSWORD SCREEN
   margin:
     0 auto
     26px;
-
 }
 
 .gate-eyebrow{
-
   margin-bottom:7px;
 
   color:var(--green);
 
   font-size:12px;
-
   font-weight:800;
 
   letter-spacing:.14em;
 
   text-transform:uppercase;
-
 }
 
 .gate-card h2{
-
-  margin:
-    0 0 9px;
+  margin:0 0 9px;
 
   font-size:29px;
-
 }
 
 .gate-card p{
-
-  margin:
-    0 0 22px;
+  margin:0 0 22px;
 
   color:var(--muted);
 
   line-height:1.55;
-
 }
 
 .gate-card label{
-
   display:block;
 
   margin-bottom:7px;
 
   font-weight:700;
-
 }
 
 .gate-card input{
-
   width:100%;
-
   min-height:50px;
 
-  padding:
-    11px 13px;
+  padding:11px 13px;
 
-  border:
-    1px solid
-    #3b493f;
-
+  border:1px solid #3b493f;
   border-radius:11px;
 
   background:#0c100e;
-
   color:var(--text);
 
   font-size:16px;
-
 }
 
 .gate-card button{
-
   width:100%;
-
   min-height:50px;
 
   margin-top:13px;
 
   border:0;
-
   border-radius:11px;
 
   background:var(--green);
-
   color:#10160d;
 
   font-size:16px;
-
   font-weight:850;
 
   cursor:pointer;
-
 }
 
 .gate-card button:hover{
-
   background:#9cd453;
-
 }
 
 .gate-error{
-
   min-height:22px;
 
   margin-top:11px;
@@ -283,15 +222,12 @@ PASSWORD SCREEN
   color:#ffaaaa;
 
   font-size:14px;
-
 }
 
 body.locked > header,
 body.locked > main,
 body.locked > footer{
-
   visibility:hidden;
-
 }
 
 
@@ -300,52 +236,37 @@ HEADER
 ========================================================= */
 
 header{
+  border-bottom:1px solid var(--border);
 
-  border-bottom:
-    1px solid
-    var(--border);
-
-  background:
-    rgba(11,15,12,.92);
-
+  background:rgba(11,15,12,.92);
 }
 
 .header-inner{
-
   min-height:108px;
 
   display:flex;
-
   align-items:center;
-
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:30px;
 
-  padding:
-    20px 0;
-
+  padding:20px 0;
 }
 
 .header-eyebrow{
-
   margin-bottom:6px;
 
   color:var(--green);
 
   font-size:12px;
-
   font-weight:800;
 
   letter-spacing:.13em;
 
   text-transform:uppercase;
-
 }
 
 .header-title{
-
   margin:0;
 
   font-size:
@@ -356,49 +277,42 @@ header{
     );
 
   line-height:1.08;
-
 }
 
 .header-subtitle{
-
-  margin:
-    7px 0 0;
+  margin:7px 0 0;
 
   color:var(--muted);
 
   line-height:1.5;
-
 }
 
 .keele-logo{
-
   width:180px;
-
   max-width:28%;
-
   max-height:82px;
 
   object-fit:contain;
-
 }
 
 
 /* =========================================================
-LANDING PAGE
+MAIN
 ========================================================= */
 
 main{
-
   padding:
     34px 0
     50px;
-
 }
 
+
+/* =========================================================
+HERO
+========================================================= */
+
 .hero{
-
   overflow:hidden;
-
   position:relative;
 
   margin-bottom:28px;
@@ -410,10 +324,7 @@ main{
       48px
     );
 
-  border:
-    1px solid
-    var(--border);
-
+  border:1px solid var(--border);
   border-radius:24px;
 
   background:
@@ -422,66 +333,50 @@ main{
       #151d18,
       #0f1511
     );
-
 }
 
 .hero::after{
-
   content:"";
 
   position:absolute;
 
   width:260px;
-
   height:260px;
 
   right:-80px;
-
   top:-100px;
 
   border-radius:50%;
 
   background:
     rgba(141,198,63,.08);
-
 }
 
 .hero-label{
-
   position:relative;
-
   z-index:1;
 
   display:inline-flex;
-
-  align-items:center;
-
-  gap:8px;
 
   margin-bottom:13px;
 
   color:var(--green);
 
   font-size:13px;
-
   font-weight:800;
 
   letter-spacing:.08em;
 
   text-transform:uppercase;
-
 }
 
 .hero h2{
-
   position:relative;
-
   z-index:1;
 
   max-width:760px;
 
-  margin:
-    0 0 14px;
+  margin:0 0 14px;
 
   font-size:
     clamp(
@@ -491,13 +386,10 @@ main{
     );
 
   line-height:1.05;
-
 }
 
 .hero p{
-
   position:relative;
-
   z-index:1;
 
   max-width:720px;
@@ -514,23 +406,18 @@ main{
     );
 
   line-height:1.6;
-
 }
 
 .hero-actions{
-
   position:relative;
-
   z-index:1;
 
   display:flex;
-
   flex-wrap:wrap;
 
   gap:12px;
 
   margin-top:25px;
-
 }
 
 
@@ -540,7 +427,6 @@ BUTTONS
 
 .primary-button,
 .secondary-button{
-
   min-height:46px;
 
   padding:
@@ -551,85 +437,58 @@ BUTTONS
   font-weight:800;
 
   cursor:pointer;
-
 }
 
 .primary-button{
-
   border:0;
 
-  background:
-    var(--green);
-
+  background:var(--green);
   color:#10160d;
-
 }
 
 .primary-button:hover{
-
   background:#9cd453;
-
 }
 
 .secondary-button{
+  border:1px solid var(--border);
 
-  border:
-    1px solid
-    var(--border);
-
-  background:
-    var(--surface2);
-
+  background:var(--surface2);
   color:var(--text);
-
 }
 
 .secondary-button:hover{
-
-  border-color:
-    #536359;
-
+  border-color:#536359;
 }
 
 
 /* =========================================================
-IMAGE BANK LANDING CARDS
+CASE LIBRARY
 ========================================================= */
 
 .library-heading{
-
   display:flex;
-
   align-items:end;
-
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:18px;
 
-  margin:
-    0 0 15px;
-
+  margin:0 0 15px;
 }
 
 .library-heading h3{
-
   margin:0;
 
   font-size:22px;
-
 }
 
 .library-heading p{
-
   margin:0;
 
   color:var(--muted);
-
 }
 
 .case-grid{
-
   display:grid;
 
   grid-template-columns:
@@ -642,26 +501,19 @@ IMAGE BANK LANDING CARDS
     );
 
   gap:16px;
-
 }
 
 .library-card{
-
   text-align:left;
 
-  min-height:180px;
+  min-height:190px;
 
   padding:20px;
 
-  border:
-    1px solid
-    var(--border);
-
+  border:1px solid var(--border);
   border-radius:17px;
 
-  background:
-    var(--surface);
-
+  background:var(--surface);
   color:var(--text);
 
   cursor:pointer;
@@ -670,66 +522,51 @@ IMAGE BANK LANDING CARDS
     transform .15s ease,
     border-color .15s ease,
     background .15s ease;
-
 }
 
 .library-card:hover{
-
-  transform:
-    translateY(-2px);
+  transform:translateY(-2px);
 
   border-color:
     rgba(141,198,63,.7);
 
-  background:
-    #151d18;
-
+  background:#151d18;
 }
 
 .library-card-number{
-
   color:var(--green);
 
   font-size:12px;
-
   font-weight:850;
 
   letter-spacing:.1em;
 
   text-transform:uppercase;
-
 }
 
 .library-card h4{
-
   margin:
     8px 0
     6px;
 
   font-size:20px;
-
 }
 
 .library-card p{
-
   margin:0;
 
   color:var(--muted);
 
   line-height:1.5;
-
 }
 
-.tag-row{
+.view-count{
+  margin-top:10px;
 
-  display:flex;
+  color:#d8dfda;
 
-  flex-wrap:wrap;
-
-  gap:7px;
-
-  margin-top:16px;
-
+  font-size:13px;
+  font-weight:700;
 }
 
 
@@ -737,10 +574,17 @@ IMAGE BANK LANDING CARDS
 TAGS
 ========================================================= */
 
+.tag-row{
+  display:flex;
+  flex-wrap:wrap;
+
+  gap:7px;
+
+  margin-top:16px;
+}
+
 .tag{
-
   display:inline-flex;
-
   align-items:center;
 
   min-height:27px;
@@ -748,122 +592,88 @@ TAGS
   padding:
     4px 9px;
 
-  border:
-    1px solid
-    var(--border);
-
+  border:1px solid var(--border);
   border-radius:999px;
 
-  background:
-    var(--surface2);
+  background:var(--surface2);
 
   color:#cbd5ce;
 
   font-size:12px;
-
   font-weight:700;
-
 }
 
 .difficulty{
-
   border-color:
     rgba(141,198,63,.38);
 
-  background:
-    var(--green-soft);
+  background:var(--green-soft);
 
   color:#bce57f;
-
 }
 
 
 /* =========================================================
-CASE VIEWER
+CASE VIEW
 ========================================================= */
 
 #caseView{
-
   display:none;
-
 }
 
 .case-shell{
-
   overflow:hidden;
 
-  border:
-    1px solid
-    var(--border);
-
+  border:1px solid var(--border);
   border-radius:22px;
 
-  background:
-    var(--surface);
-
+  background:var(--surface);
 }
 
 .case-topbar{
-
   display:flex;
-
   align-items:center;
-
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:18px;
 
   padding:
     18px 20px;
 
-  border-bottom:
-    1px solid
-    var(--border);
+  border-bottom:1px solid var(--border);
 
-  background:
-    var(--surface2);
-
+  background:var(--surface2);
 }
 
 .back-button{
-
   border:0;
 
   padding:0;
 
   background:none;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 
   font-weight:750;
 
   cursor:pointer;
-
 }
 
 .back-button:hover{
-
   color:var(--text);
-
 }
 
 .progress-copy{
+  margin-bottom:5px;
 
-  color:
-    var(--muted);
+  color:var(--muted);
 
   font-size:13px;
-
   font-weight:700;
-
 }
 
 .progress-track{
-
   width:150px;
-
   height:6px;
 
   overflow:hidden;
@@ -871,71 +681,47 @@ CASE VIEWER
   border-radius:999px;
 
   background:#29322d;
-
 }
 
 .progress-fill{
-
   height:100%;
-
   width:0;
 
   border-radius:999px;
 
-  background:
-    var(--green);
+  background:var(--green);
 
-  transition:
-    width .2s ease;
-
+  transition:width .2s ease;
 }
 
 .case-content{
-
   padding:
     clamp(
       16px,
       4vw,
       30px
     );
-
 }
 
 .case-heading{
-
-  display:flex;
-
-  align-items:start;
-
-  justify-content:
-    space-between;
-
-  gap:25px;
-
   margin-bottom:20px;
-
 }
 
 .case-number{
-
   margin-bottom:6px;
 
   color:var(--green);
 
   font-size:12px;
-
   font-weight:850;
 
   letter-spacing:.1em;
 
   text-transform:uppercase;
-
 }
 
 .case-heading h2{
-
-  margin:
-    0 0 8px;
+  margin:0 0 8px;
 
   font-size:
     clamp(
@@ -943,15 +729,12 @@ CASE VIEWER
       4vw,
       36px
     );
-
 }
 
 .case-heading p{
-
   margin:0;
 
   color:var(--muted);
-
 }
 
 
@@ -960,7 +743,6 @@ CLINICAL HISTORY
 ========================================================= */
 
 .history-box{
-
   display:grid;
 
   grid-template-columns:
@@ -973,55 +755,40 @@ CLINICAL HISTORY
   padding:
     16px 18px;
 
-  border:
-    1px solid
-    var(--border);
-
+  border:1px solid var(--border);
   border-radius:14px;
 
-  background:
-    var(--surface2);
-
+  background:var(--surface2);
 }
 
 .history-icon{
-
   width:38px;
-
   height:38px;
 
   display:grid;
-
   place-items:center;
 
   border-radius:10px;
 
-  background:
-    var(--green-soft);
+  background:var(--green-soft);
 
-  color:
-    var(--green);
+  color:var(--green);
 
   font-weight:900;
-
 }
 
 .history-box strong{
-
   display:block;
 
   margin-bottom:5px;
-
 }
 
 .history-box p{
-
   margin:0;
 
   color:#d6ddd8;
 
   line-height:1.55;
-
 }
 
 
@@ -1030,30 +797,23 @@ QUESTION
 ========================================================= */
 
 .challenge{
-
-  margin:
-    0 0 19px;
-
+  margin:0 0 22px;
 }
 
 .challenge-label{
-
   margin-bottom:5px;
 
   color:var(--green);
 
   font-size:12px;
-
   font-weight:850;
 
   letter-spacing:.1em;
 
   text-transform:uppercase;
-
 }
 
 .challenge h3{
-
   margin:0;
 
   font-size:
@@ -1064,7 +824,53 @@ QUESTION
     );
 
   line-height:1.35;
+}
 
+
+/* =========================================================
+MULTIPLE IMAGE VIEWS
+========================================================= */
+
+.image-comparison-block{
+  margin-top:24px;
+}
+
+.image-comparison-block:first-of-type{
+  margin-top:0;
+}
+
+.view-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:15px;
+
+  margin-bottom:10px;
+}
+
+.view-heading h4{
+  margin:0;
+
+  font-size:19px;
+}
+
+.view-number{
+  color:var(--muted);
+
+  font-size:12px;
+  font-weight:700;
+}
+
+.view-caption{
+  margin:
+    -3px 0
+    12px;
+
+  color:var(--muted);
+
+  font-size:14px;
+  line-height:1.5;
 }
 
 
@@ -1073,23 +879,17 @@ IMAGE VIEWER
 ========================================================= */
 
 .viewer-frame{
-
   overflow:hidden;
 
   padding:10px;
 
-  border:
-    1px solid
-    #313c35;
-
+  border:1px solid #313c35;
   border-radius:17px;
 
   background:#050706;
-
 }
 
 .compare{
-
   position:relative;
 
   width:100%;
@@ -1103,9 +903,7 @@ IMAGE VIEWER
   aspect-ratio:4/3;
 
   user-select:none;
-
   -webkit-user-select:none;
-
   -webkit-touch-callout:none;
 
   touch-action:pan-y;
@@ -1116,25 +914,20 @@ IMAGE VIEWER
     layout paint;
 
   cursor:ew-resize;
-
 }
 
 .compare img{
-
   position:absolute;
 
   inset:0;
 
   width:100%;
-
   height:100%;
 
   object-fit:contain;
 
   user-select:none;
-
   -webkit-user-select:none;
-
   -webkit-user-drag:none;
 
   pointer-events:none;
@@ -1143,20 +936,16 @@ IMAGE VIEWER
 
   transform:
     translateZ(0);
-
 }
 
 
 /* Annotated image starts completely hidden */
 
 .after-wrap{
-
   position:absolute;
 
   top:0;
-
   bottom:0;
-
   left:0;
 
   width:0%;
@@ -1168,15 +957,12 @@ IMAGE VIEWER
   contain:paint;
 
   will-change:width;
-
 }
 
 .after-wrap img{
-
   position:absolute;
 
   top:0;
-
   left:0;
 
   max-width:none;
@@ -1189,24 +975,19 @@ IMAGE VIEWER
   pointer-events:none;
 
   user-select:none;
-
   -webkit-user-select:none;
-
   -webkit-user-drag:none;
 
   backface-visibility:hidden;
 
   transform:
     translateZ(0);
-
 }
 
 .divider{
-
   position:absolute;
 
   top:0;
-
   bottom:0;
 
   left:0%;
@@ -1223,15 +1004,12 @@ IMAGE VIEWER
     rgba(0,0,0,.8);
 
   pointer-events:none;
-
 }
 
 .knob{
-
   position:absolute;
 
   top:50%;
-
   left:0%;
 
   transform:
@@ -1241,19 +1019,14 @@ IMAGE VIEWER
     );
 
   min-width:66px;
-
   height:38px;
 
   padding:
     0 11px;
 
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
-  gap:5px;
 
   border-radius:999px;
 
@@ -1270,17 +1043,14 @@ IMAGE VIEWER
     rgba(0,0,0,.42);
 
   font-size:11px;
-
   font-weight:900;
 
   letter-spacing:.07em;
 
   pointer-events:none;
-
 }
 
 .image-label{
-
   position:absolute;
 
   z-index:4;
@@ -1298,31 +1068,22 @@ IMAGE VIEWER
   color:#fff;
 
   font-size:12px;
-
   font-weight:800;
 
   pointer-events:none;
-
 }
 
 .image-label.left{
-
   left:13px;
-
 }
 
 .image-label.right{
-
   right:13px;
-
 }
 
 .slider-help{
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
 
   gap:8px;
@@ -1334,7 +1095,6 @@ IMAGE VIEWER
   color:var(--muted);
 
   font-size:13px;
-
 }
 
 
@@ -1343,7 +1103,6 @@ SLIDER CONTROL
 ========================================================= */
 
 .range-row{
-
   display:grid;
 
   grid-template-columns:
@@ -1354,47 +1113,43 @@ SLIDER CONTROL
   align-items:center;
 
   margin-top:13px;
-
 }
 
 .range-row span{
-
   color:var(--muted);
 
   font-size:13px;
-
   font-weight:700;
-
 }
 
 input[type=range]{
-
   width:100%;
-
   min-height:40px;
 
   cursor:pointer;
 
-  accent-color:
-    var(--green);
-
+  accent-color:var(--green);
 }
 
-
-/* =========================================================
-VIEWER ACTIONS
-========================================================= */
-
 .viewer-actions{
-
   display:flex;
-
   flex-wrap:wrap;
 
   gap:10px;
 
-  margin-top:15px;
+  margin-top:12px;
+}
 
+
+/* =========================================================
+DIVIDER BETWEEN IMAGE VIEWS
+========================================================= */
+
+.view-divider{
+  margin:28px 0;
+
+  border:0;
+  border-top:1px solid var(--border);
 }
 
 
@@ -1403,7 +1158,6 @@ REVEAL CARDS
 ========================================================= */
 
 .reveal-section{
-
   display:grid;
 
   grid-template-columns:
@@ -1417,135 +1171,93 @@ REVEAL CARDS
 
   gap:14px;
 
-  margin-top:23px;
-
+  margin-top:30px;
 }
 
 .reveal-card{
-
   padding:17px;
 
-  border:
-    1px solid
-    var(--border);
-
+  border:1px solid var(--border);
   border-radius:15px;
 
-  background:
-    var(--surface2);
-
+  background:var(--surface2);
 }
 
 .reveal-card-title{
-
   display:flex;
-
   align-items:center;
-
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:10px;
-
 }
 
 .reveal-card h4{
-
   margin:0;
 
   font-size:17px;
-
 }
 
 .reveal-content{
-
   display:none;
 
   margin-top:14px;
-
   padding-top:14px;
 
-  border-top:
-    1px solid
-    var(--border);
+  border-top:1px solid var(--border);
 
   color:#dce3de;
 
   line-height:1.6;
-
 }
 
 .reveal-content strong{
-
   color:#fff;
-
 }
 
 .reveal-button{
-
   min-height:39px;
 
   padding:
     8px 12px;
 
-  border:
-    1px solid
-    var(--border);
-
+  border:1px solid var(--border);
   border-radius:9px;
 
-  background:
-    var(--surface3);
-
+  background:var(--surface3);
   color:var(--text);
 
   font-size:13px;
-
   font-weight:800;
 
   cursor:pointer;
-
 }
 
 .reveal-button:hover{
-
-  border-color:
-    var(--green);
-
+  border-color:var(--green);
 }
 
 
 /* =========================================================
-BOTTOM NAVIGATION
+CASE NAVIGATION
 ========================================================= */
 
 .case-nav{
-
   display:flex;
-
   align-items:center;
-
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:12px;
 
   margin-top:25px;
-
   padding-top:20px;
 
-  border-top:
-    1px solid
-    var(--border);
-
+  border-top:1px solid var(--border);
 }
 
 .case-nav-right{
-
   display:flex;
 
   gap:10px;
-
 }
 
 
@@ -1554,35 +1266,25 @@ FOOTER
 ========================================================= */
 
 footer{
-
   padding:
     0 0
     35px;
 
-  color:
-    #7f8b84;
+  color:#7f8b84;
 
   font-size:13px;
-
 }
 
 .footer-inner{
-
   display:flex;
-
   align-items:center;
-
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   gap:20px;
 
   padding-top:18px;
 
-  border-top:
-    1px solid
-    var(--border);
-
+  border-top:1px solid var(--border);
 }
 
 
@@ -1591,31 +1293,25 @@ ANIMATION
 ========================================================= */
 
 .fade-in{
-
   animation:
     fadeIn
     .22s ease;
-
 }
 
 @keyframes fadeIn{
 
   from{
-
     opacity:0;
 
     transform:
       translateY(4px);
-
   }
 
   to{
-
     opacity:1;
 
     transform:
       translateY(0);
-
   }
 
 }
@@ -1625,117 +1321,87 @@ ANIMATION
 MOBILE
 ========================================================= */
 
-@media(
-  max-width:720px
-){
+@media(max-width:720px){
 
   .header-inner{
-
     align-items:flex-start;
 
     flex-direction:column;
 
     min-height:auto;
-
   }
 
   .keele-logo{
-
     width:145px;
 
     max-width:60%;
-
   }
 
   .library-heading{
-
     align-items:flex-start;
 
     flex-direction:column;
-
   }
 
   .case-topbar{
-
     align-items:flex-start;
 
     flex-direction:column;
-
   }
 
   .progress-track{
-
     width:100%;
-
-  }
-
-  .case-heading{
-
-    flex-direction:column;
-
   }
 
   .reveal-section{
-
     grid-template-columns:1fr;
-
   }
 
   .case-nav{
-
     align-items:stretch;
 
     flex-direction:column;
-
   }
 
   .case-nav-right{
-
     display:grid;
 
     grid-template-columns:
       1fr 1fr;
-
   }
 
   .case-nav-right button{
-
     width:100%;
-
   }
 
   .footer-inner{
-
     align-items:flex-start;
 
     flex-direction:column;
-
   }
 
 }
 
 
-/* =========================================================
-VERY SMALL SCREENS
-========================================================= */
-
-@media(
-  max-width:430px
-){
+@media(max-width:430px){
 
   .history-box{
-
     grid-template-columns:1fr;
-
   }
 
   .knob{
-
     min-width:52px;
 
     padding:
       0 7px;
+  }
 
+  .view-heading{
+    align-items:flex-start;
+
+    flex-direction:column;
+
+    gap:4px;
   }
 
 }
@@ -1780,9 +1446,7 @@ MSK Ultrasound Image Bank
 This teaching resource is for students enrolled on the PgCert Medical Ultrasound programme.
 </p>
 
-<label
-  for="sitePassword"
->
+<label for="sitePassword">
 Password
 </label>
 
@@ -1793,9 +1457,7 @@ Password
   required
 >
 
-<button
-  type="submit"
->
+<button type="submit">
 Enter Image Bank
 </button>
 
@@ -1817,9 +1479,7 @@ HEADER
 
 <header>
 
-<div
-  class="wrap header-inner"
->
+<div class="wrap header-inner">
 
 <div>
 
@@ -1873,7 +1533,7 @@ Build your eye for ultrasound.
 </h2>
 
 <p>
-Work through the image bank one case at a time. Review the clinical context, assess the unannotated scan, then drag across the image to reveal the teaching annotations.
+Work through the image bank one case at a time. Review the clinical context, assess each unannotated ultrasound view, then drag across the images to reveal the teaching annotations.
 </p>
 
 <div class="hero-actions">
@@ -1917,13 +1577,9 @@ Select an image set to begin.
 </section>
 
 
-<!-- ======================================================
-CASE VIEW
-====================================================== -->
+<!-- CASE VIEW -->
 
-<section
-  id="caseView"
->
+<section id="caseView">
 
 <div class="case-shell fade-in">
 
@@ -2003,8 +1659,6 @@ MSK Ultrasound Teaching Resource
 
 /* =========================================================
 PASSWORD
-
-CHANGE THIS IF REQUIRED
 ========================================================= */
 
 const SITE_PASSWORD =
@@ -2081,9 +1735,9 @@ passwordForm.addEventListener(
 
 
 /* =========================================================
-IMAGE BANK
+YOUR CASES
 
-ADD ALL NEW CASES IN THIS SECTION
+THIS IS THE SECTION YOU EDIT WHEN ADDING CASES OR IMAGES
 ========================================================= */
 
 const cases = [
@@ -2112,19 +1766,83 @@ const cases = [
     "Patient presenting with plantar forefoot symptoms centred around the 3rd and 4th metatarsal heads, with a sensation described as walking on a small stone.",
 
   question:
-    "What structures and abnormality can you identify on the unannotated image?",
+    "Review the ultrasound images. What structures and abnormality can you identify?",
 
-  plain:
-    "images/case-01-plain.png",
 
-  annotated:
-    "images/case-01-annotated.jpg",
+  /* =======================================================
+  EACH ITEM INSIDE images:[ ] CREATES ITS OWN SLIDER
+  ======================================================= */
+
+  images:[
+
+    {
+
+      title:
+        "Primary ultrasound view",
+
+      caption:
+        "Assess the image before dragging across to reveal the annotation.",
+
+      plain:
+        "images/case-01-plain.png",
+
+      annotated:
+        "images/case-01-annotated.jpg"
+
+    }
+
+
+    /*
+    =======================================================
+    TO ADD A SECOND IMAGE TO THIS SAME CASE:
+
+    Put a comma after the } above and paste:
+
+    ,{
+
+      title:
+        "Longitudinal view",
+
+      caption:
+        "Long-axis assessment of the region of interest.",
+
+      plain:
+        "images/case-01-long-plain.jpg",
+
+      annotated:
+        "images/case-01-long-annotated.jpg"
+
+    }
+
+
+    THEN ANOTHER ONE COULD BE:
+
+    ,{
+
+      title:
+        "Transverse view",
+
+      caption:
+        "Short-axis assessment of the region of interest.",
+
+      plain:
+        "images/case-01-trans-plain.jpg",
+
+      annotated:
+        "images/case-01-trans-annotated.jpg"
+
+    }
+
+    =======================================================
+    */
+
+  ],
 
   diagnosis:
     "Interdigital nerve abnormality within the 3rd/4th webspace.",
 
   teachingNote:
-    "Use the annotated image to follow the course of the interdigital nerve and correlate the measured abnormality with the surrounding webspace structures."
+    "Use the annotated images to follow the course of the interdigital nerve and correlate the abnormality with the surrounding webspace structures."
 
 }
 
@@ -2132,19 +1850,23 @@ const cases = [
 /*
 
 =========================================================
-EXAMPLE CASE 2
+EXAMPLE OF A WHOLE NEW CASE WITH TWO SLIDERS
 =========================================================
 
-Add a comma after the closing } of Case 1 and paste:
+Put a comma after the closing } of Case 1 and paste:
 
 ,{
-  id:"case-02",
+  id:
+    "case-02",
 
-  title:"Insertional Achilles",
+  title:
+    "Insertional Achilles",
 
-  region:"Posterior ankle",
+  region:
+    "Posterior ankle",
 
-  difficulty:"Intermediate",
+  difficulty:
+    "Intermediate",
 
   tags:[
     "Ankle",
@@ -2153,27 +1875,54 @@ Add a comma after the closing } of Case 1 and paste:
   ],
 
   history:
-    "Patient with posterior heel pain aggravated by loading and activity.",
+    "Patient presenting with posterior heel pain aggravated by loading and activity.",
 
   question:
-    "What sonographic abnormalities can you identify?",
+    "Review the longitudinal and transverse appearances. What abnormalities can you identify?",
 
-  plain:
-    "images/case-02-plain.jpg",
+  images:[
 
-  annotated:
-    "images/case-02-annotated.jpg",
+    {
+      title:
+        "Longitudinal",
+
+      caption:
+        "Long-axis assessment of the Achilles insertion.",
+
+      plain:
+        "images/case-02-long-plain.jpg",
+
+      annotated:
+        "images/case-02-long-annotated.jpg"
+    },
+
+    {
+      title:
+        "Transverse",
+
+      caption:
+        "Short-axis assessment of the Achilles tendon.",
+
+      plain:
+        "images/case-02-trans-plain.jpg",
+
+      annotated:
+        "images/case-02-trans-annotated.jpg"
+    }
+
+  ],
 
   diagnosis:
     "Insertional Achilles tendinopathy.",
 
   teachingNote:
-    "Look for tendon thickening, altered echotexture and associated insertional changes."
+    "Correlate findings across both scanning planes. Assess tendon thickness, fibrillar architecture, insertional change and associated hyperaemia."
 }
 
 =========================================================
 
 */
+
 
 ];
 
@@ -2260,6 +2009,22 @@ function renderLibrary(){
         .join("");
 
 
+      const imageCount =
+        Array.isArray(caseItem.images)
+          ?
+          caseItem.images.length
+          :
+          0;
+
+
+      const viewWord =
+        imageCount === 1
+          ?
+          "image comparison"
+          :
+          "image comparisons";
+
+
       card.innerHTML =
       `
 
@@ -2274,6 +2039,10 @@ function renderLibrary(){
       <p>
         ${escapeHtml(caseItem.region)}
       </p>
+
+      <div class="view-count">
+        ${imageCount} ${viewWord}
+      </div>
 
       <div class="tag-row">
 
@@ -2350,6 +2119,187 @@ function showLibrary(){
 
 
 /* =========================================================
+BUILD HTML FOR EACH IMAGE SLIDER
+========================================================= */
+
+function buildImageViews(caseItem){
+
+  if(
+    !Array.isArray(caseItem.images)
+    ||
+    caseItem.images.length === 0
+  ){
+
+    return `
+      <p>
+        No image comparisons have been added to this case yet.
+      </p>
+    `;
+
+  }
+
+
+  return caseItem.images
+  .map(
+    (imageItem,index)=>{
+
+
+      const divider =
+        index <
+        caseItem.images.length - 1
+          ?
+          `<hr class="view-divider">`
+          :
+          "";
+
+
+      return `
+      
+      <div
+        class="image-comparison-block"
+        data-slider-index="${index}"
+      >
+
+        <div class="view-heading">
+
+          <h4>
+            ${escapeHtml(imageItem.title || `View ${index + 1}`)}
+          </h4>
+
+          <div class="view-number">
+            Image ${index + 1} of ${caseItem.images.length}
+          </div>
+
+        </div>
+
+
+        ${
+          imageItem.caption
+            ?
+            `
+            <p class="view-caption">
+              ${escapeHtml(imageItem.caption)}
+            </p>
+            `
+            :
+            ""
+        }
+
+
+        <div class="viewer-frame">
+
+
+          <div
+            class="compare"
+            aria-label="Interactive ultrasound comparison"
+          >
+
+
+            <img
+              src="${imageItem.plain}"
+              alt="Unannotated ultrasound image"
+              class="plain-image"
+              draggable="false"
+            >
+
+
+            <div class="after-wrap">
+
+              <img
+                src="${imageItem.annotated}"
+                alt="Annotated ultrasound image"
+                class="after-image"
+                draggable="false"
+              >
+
+            </div>
+
+
+            <div class="divider">
+            </div>
+
+
+            <div class="knob">
+              ‹ DRAG ›
+            </div>
+
+
+            <div class="image-label left">
+              UNANNOTATED
+            </div>
+
+
+            <div class="image-label right">
+              ANNOTATED
+            </div>
+
+
+          </div>
+
+
+          <div class="slider-help">
+            ← Drag across the image to reveal the annotation →
+          </div>
+
+
+        </div>
+
+
+        <div class="range-row">
+
+          <span>
+            Plain
+          </span>
+
+          <input
+            class="comparison-range"
+            type="range"
+            min="0"
+            max="100"
+            value="0"
+            aria-label="Reveal annotated image"
+          >
+
+          <span>
+            Annotated
+          </span>
+
+        </div>
+
+
+        <div class="viewer-actions">
+
+          <button
+            type="button"
+            class="secondary-button reset-slider"
+          >
+            ↺ Reset image
+          </button>
+
+          <button
+            type="button"
+            class="secondary-button reveal-slider"
+          >
+            Reveal full annotation
+          </button>
+
+        </div>
+
+
+      </div>
+
+      ${divider}
+
+      `;
+
+    }
+  )
+  .join("");
+
+}
+
+
+/* =========================================================
 RENDER CASE
 ========================================================= */
 
@@ -2386,34 +2336,34 @@ function renderCase(){
     .join("");
 
 
+  const imageViews =
+    buildImageViews(c);
+
+
   caseContent.innerHTML =
   `
 
   <div class="case-heading">
 
-    <div>
+    <div class="case-number">
+      Case ${activeIndex + 1}
+    </div>
 
-      <div class="case-number">
-        Case ${activeIndex + 1}
-      </div>
+    <h2>
+      ${escapeHtml(c.title)}
+    </h2>
 
-      <h2>
-        ${escapeHtml(c.title)}
-      </h2>
+    <p>
+      ${escapeHtml(c.region)}
+    </p>
 
-      <p>
-        ${escapeHtml(c.region)}
-      </p>
+    <div class="tag-row">
 
-      <div class="tag-row">
+      <span class="tag difficulty">
+        ${escapeHtml(c.difficulty)}
+      </span>
 
-        <span class="tag difficulty">
-          ${escapeHtml(c.difficulty)}
-        </span>
-
-        ${tags}
-
-      </div>
+      ${tags}
 
     </div>
 
@@ -2454,115 +2404,7 @@ function renderCase(){
   </div>
 
 
-  <div class="viewer-frame">
-
-
-    <div
-      class="compare"
-      id="compare"
-      aria-label="Interactive ultrasound comparison"
-    >
-
-
-      <img
-        src="${c.plain}"
-        alt="Unannotated ultrasound image"
-        draggable="false"
-      >
-
-
-      <div
-        class="after-wrap"
-        id="afterWrap"
-      >
-
-        <img
-          src="${c.annotated}"
-          alt="Annotated ultrasound image"
-          id="afterImg"
-          draggable="false"
-        >
-
-      </div>
-
-
-      <div
-        class="divider"
-        id="divider"
-      >
-      </div>
-
-
-      <div
-        class="knob"
-        id="knob"
-      >
-        ‹ DRAG ›
-      </div>
-
-
-      <div class="image-label left">
-        UNANNOTATED
-      </div>
-
-
-      <div class="image-label right">
-        ANNOTATED
-      </div>
-
-
-    </div>
-
-
-    <div class="slider-help">
-      ← Drag across the image to reveal the annotation →
-    </div>
-
-
-  </div>
-
-
-  <div class="range-row">
-
-    <span>
-      Plain
-    </span>
-
-    <input
-      id="range"
-      type="range"
-      min="0"
-      max="100"
-      value="0"
-      aria-label="Reveal annotated image"
-    >
-
-    <span>
-      Annotated
-    </span>
-
-  </div>
-
-
-  <div class="viewer-actions">
-
-    <button
-      type="button"
-      class="secondary-button"
-      id="resetButton"
-    >
-      ↺ Reset image
-    </button>
-
-    <button
-      type="button"
-      class="secondary-button"
-      id="annotatedButton"
-    >
-      Reveal full annotation
-    </button>
-
-  </div>
+  ${imageViews}
 
 
   <div class="reveal-section">
@@ -2672,7 +2514,7 @@ function renderCase(){
   `;
 
 
-  setupSlider();
+  setupAllSliders();
 
   setupRevealButtons();
 
@@ -2682,49 +2524,74 @@ function renderCase(){
 
 
 /* =========================================================
-SLIDER
+SET UP EVERY SLIDER IN THE CASE
 ========================================================= */
 
-function setupSlider(){
+function setupAllSliders(){
+
+  const sliderBlocks =
+    document.querySelectorAll(
+      ".image-comparison-block"
+    );
+
+
+  sliderBlocks.forEach(
+    sliderBlock =>{
+
+      setupSingleSlider(
+        sliderBlock
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+SET UP ONE INDEPENDENT SLIDER
+========================================================= */
+
+function setupSingleSlider(sliderBlock){
 
   const compare =
-    document.getElementById(
-      "compare"
+    sliderBlock.querySelector(
+      ".compare"
     );
 
   const range =
-    document.getElementById(
-      "range"
+    sliderBlock.querySelector(
+      ".comparison-range"
     );
 
   const afterWrap =
-    document.getElementById(
-      "afterWrap"
+    sliderBlock.querySelector(
+      ".after-wrap"
     );
 
   const afterImg =
-    document.getElementById(
-      "afterImg"
+    sliderBlock.querySelector(
+      ".after-image"
     );
 
   const divider =
-    document.getElementById(
-      "divider"
+    sliderBlock.querySelector(
+      ".divider"
     );
 
   const knob =
-    document.getElementById(
-      "knob"
+    sliderBlock.querySelector(
+      ".knob"
     );
 
   const resetButton =
-    document.getElementById(
-      "resetButton"
+    sliderBlock.querySelector(
+      ".reset-slider"
     );
 
-  const annotatedButton =
-    document.getElementById(
-      "annotatedButton"
+  const revealButton =
+    sliderBlock.querySelector(
+      ".reveal-slider"
     );
 
 
@@ -2854,8 +2721,7 @@ function setupSlider(){
   setSlider(0);
 
 
-  window.addEventListener(
-    "resize",
+  const resizeHandler =
     ()=>{
 
       syncImageSize();
@@ -2864,7 +2730,12 @@ function setupSlider(){
         currentValue
       );
 
-    }
+    };
+
+
+  window.addEventListener(
+    "resize",
+    resizeHandler
   );
 
 
@@ -3026,7 +2897,7 @@ function setupSlider(){
   );
 
 
-  annotatedButton.addEventListener(
+  revealButton.addEventListener(
     "click",
     ()=>setSlider(100)
   );
@@ -3035,7 +2906,7 @@ function setupSlider(){
 
 
 /* =========================================================
-REVEAL PANELS
+DIAGNOSIS + TEACHING POINT
 ========================================================= */
 
 function setupRevealButtons(){
@@ -3189,7 +3060,7 @@ function setupNavigation(){
 
 
 /* =========================================================
-BUTTON EVENTS
+MAIN BUTTON EVENTS
 ========================================================= */
 
 startButton.addEventListener(
