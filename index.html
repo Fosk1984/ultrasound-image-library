@@ -55,30 +55,8 @@ main{padding:34px 0 50px} .hero{margin-bottom:28px;padding:clamp(25px,5vw,48px);
 <script>
 const API='https://yfynhguvgoaxijkftkns.supabase.co/functions/v1/msk-image-bank';
 
-/* Your existing two GitHub cases stay here. Future cases come from Admin automatically. */
-const localCases=[
-{
- id:"local-case-01",title:"3rd/4th Webspace",region:"Forefoot",difficulty:"Intermediate",tags:["Foot","Nerve","Webspace"],
- history:"Patient presenting with plantar forefoot symptoms centred around the 3rd and 4th metatarsal heads, with a sensation described as walking on a small stone.",
- question:"Review the ultrasound image. What structures and abnormality can you identify?",
- images:[{title:"3rd/4th Webspace",caption:"Assess the image before dragging across to reveal the annotation.",plain:"images/case-01-plain.png",annotated:"images/case-01-annotated.jpg"}],
- diagnosis:"Interdigital nerve abnormality within the 3rd/4th webspace.",
- teachingNote:"Use the annotated image to follow the course of the interdigital nerve and correlate the measured abnormality with the surrounding webspace structures."
-},
-{
- id:"local-case-02",title:"Vastus Lateralis Myofascial Injury",region:"Right anterior thigh",difficulty:"Intermediate",tags:["Thigh","Muscle","Myofascial injury","Sports"],
- history:"18-year-old professional footballer following a direct contusion injury to the right thigh. He now reports difficulty performing a straight leg raise.",
- question:"Review both imaging planes. Describe the abnormality, identify the anatomical structures involved and suggest the most likely injury pattern.",
- images:[
-  {title:"Longitudinal",caption:"Long-axis assessment through the lateral quadriceps compartment.",plain:"images/case-02-long-plain.png",annotated:"images/case-02-long-annotated.jpg"},
-  {title:"Transverse",caption:"Short-axis assessment through the region of abnormality.",plain:"images/case-02-trans-plain.png",annotated:"images/case-02-trans-annotated.jpg"}
- ],
- diagnosis:"Posterior myofascial injury of the vastus lateralis with disruption of the posterior myofascial boundary and associated intermuscular fluid/haematoma tracking along the interface with vastus intermedius.",
- teachingNote:"Correlate the appearances across both imaging planes. The abnormality is centred at the posterior myofascial margin of vastus lateralis, with disruption of the myofascial boundary and fluid tracking along the interface with vastus intermedius."
-}
-];
-
-let cases=[...localCases],activeIndex=0;
+/* All cases are now managed through the Admin database. */
+let cases=[],activeIndex=0;
 
 async function api(payload){
  const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
@@ -92,7 +70,7 @@ document.getElementById("loginForm").addEventListener("submit",async e=>{
  try{
   const password=document.getElementById("password").value;
   const result=await api({action:"list-cases",password});
-  cases=[...localCases,...(result.cases||[])];
+  cases=result.cases||[];
   document.body.classList.remove("locked"); document.getElementById("gate").remove(); renderLibrary();
  }catch(err){s.textContent=err.message;}
 });
