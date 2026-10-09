@@ -4,222 +4,1751 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MSK Image Bank Admin</title>
+
 <style>
-:root{--bg:#090c0b;--panel:#111613;--panel2:#171e1a;--text:#f4f7f5;--muted:#aab5ae;--border:#2b3630;--green:#8dc63f;--danger:#ff8a8a;--max:980px}
+:root{
+  --bg:#090c0b;
+  --panel:#111613;
+  --panel2:#171e1a;
+  --text:#f4f7f5;
+  --muted:#aab5ae;
+  --border:#2b3630;
+  --green:#8dc63f;
+  --green-soft:rgba(141,198,63,.12);
+  --danger:#ff9f9f;
+  --max:1000px;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+body{
+  margin:0;
+  background:radial-gradient(circle at top right,rgba(141,198,63,.05),transparent 28%),var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
 .wrap{width:min(calc(100% - 32px),var(--max));margin:auto}
 header{border-bottom:1px solid var(--border);padding:22px 0;background:#0d120f}
-h1{margin:0;font-size:clamp(25px,4vw,38px)} .sub{margin:7px 0 0;color:var(--muted)}
+h1{margin:0;font-size:clamp(25px,4vw,38px)}
+.sub{margin:7px 0 0;color:var(--muted)}
 main{padding:28px 0 50px}
 .card{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:18px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 label{display:block;font-weight:750;margin-bottom:6px}
-input,select,textarea{width:100%;border:1px solid #3a473f;border-radius:10px;background:#0c100e;color:var(--text);padding:11px 12px;font-size:16px}
+input,select,textarea{
+  width:100%;border:1px solid #3a473f;border-radius:10px;background:#0c100e;color:var(--text);padding:11px 12px;font-size:16px
+}
 textarea{min-height:105px;resize:vertical}
 button{min-height:44px;border-radius:10px;padding:9px 14px;font-weight:800;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
 .primary{border:0;background:var(--green);color:#10160d}
 .secondary{border:1px solid var(--border);background:var(--panel2);color:var(--text)}
 .danger{border:1px solid #673e3e;background:#241717;color:#ffb4b4}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.status{margin-top:12px;color:var(--muted);min-height:22px} .status.good{color:#b9e886} .status.bad{color:#ffabab}
+.status{margin-top:12px;color:var(--muted);min-height:22px}
+.status.good{color:#b9e886}
+.status.bad{color:#ffabab}
 .hidden{display:none!important}
+.small{font-size:13px;color:var(--muted);line-height:1.5}
+.checkbox{display:flex;gap:9px;align-items:center;margin-top:15px}
+.checkbox input{width:auto}
 .view{border:1px solid var(--border);border-radius:14px;padding:16px;margin-top:14px;background:var(--panel2)}
 .view-head{display:flex;justify-content:space-between;gap:10px;align-items:center}
 .view-head h3{margin:0;font-size:17px}
+.current-images{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.current-image{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#050706}
+.current-image img{display:block;width:100%;height:190px;object-fit:contain;background:#000}
+.current-image div{padding:8px 10px;font-size:12px;color:var(--muted)}
 .existing{display:grid;gap:10px}
-.existing-item{display:flex;justify-content:space-between;gap:14px;align-items:center;border:1px solid var(--border);border-radius:12px;padding:13px;background:var(--panel2)}
-.small{font-size:13px;color:var(--muted)} .checkbox{display:flex;gap:9px;align-items:center;margin-top:13px} .checkbox input{width:auto}
-@media(max-width:680px){.grid{grid-template-columns:1fr}.existing-item{align-items:flex-start;flex-direction:column}}
+.existing-item{
+  display:flex;justify-content:space-between;gap:14px;align-items:center;border:1px solid var(--border);
+  border-radius:12px;padding:13px;background:var(--panel2)
+}
+.existing-actions{display:flex;gap:8px;flex-wrap:wrap}
+.edit-banner{
+  margin-bottom:18px;padding:14px 16px;border:1px solid rgba(141,198,63,.45);
+  border-radius:13px;background:var(--green-soft)
+}
+.edit-banner strong{color:#c9ef91}
+@media(max-width:680px){
+  .grid{grid-template-columns:1fr}
+  .current-images{grid-template-columns:1fr}
+  .existing-item{align-items:flex-start;flex-direction:column}
+}
 </style>
 </head>
+
 <body>
-<header><div class="wrap"><h1>PgCert. MSK Ultrasound Image Bank</h1><p class="sub">Admin · add cases without editing website code</p></div></header>
+
+<header>
+  <div class="wrap">
+    <h1>PgCert. MSK Ultrasound Image Bank</h1>
+    <p class="sub">Admin · add and edit cases without touching the website code</p>
+  </div>
+</header>
+
 <main class="wrap">
 
 <section id="loginCard" class="card">
   <h2>Admin sign in</h2>
   <p class="small">Enter the separate admin password.</p>
+
   <form id="loginForm">
     <label for="adminPassword">Admin password</label>
     <input id="adminPassword" type="password" autocomplete="current-password" required>
-    <div class="actions"><button class="primary" type="submit">Open admin</button></div>
+
+    <div class="actions">
+      <button class="primary" type="submit">Open admin</button>
+    </div>
+
     <div id="loginStatus" class="status"></div>
   </form>
 </section>
 
+
 <section id="adminArea" class="hidden">
+
+  <div id="editBanner" class="edit-banner hidden">
+    <strong>Editing existing case:</strong>
+    <span id="editBannerTitle"></span>
+  </div>
+
   <form id="caseForm">
+
     <div class="card">
-      <h2>Add a new case</h2>
-      <div class="grid">
-        <div><label for="title">Case title</label><input id="title" required placeholder="e.g. Achilles insertional tendinopathy"></div>
-        <div><label for="region">Region</label><input id="region" placeholder="e.g. Posterior ankle"></div>
+
+      <div class="view-head">
         <div>
-          <label for="difficulty">Difficulty</label>
-          <select id="difficulty"><option>Foundation</option><option selected>Intermediate</option><option>Advanced</option></select>
+          <h2 id="formHeading" style="margin:0">Add a new case</h2>
+          <div class="small" id="formSubheading">
+            Fill in the case details and upload at least one annotated/unannotated image pair.
+          </div>
         </div>
-        <div><label for="tags">Tags</label><input id="tags" placeholder="Ankle, Tendon, Sports"></div>
       </div>
 
-      <div style="margin-top:14px"><label for="history">Clinical history</label><textarea id="history"></textarea></div>
-      <div style="margin-top:14px"><label for="question">Learner question</label><textarea id="question"></textarea></div>
-      <div style="margin-top:14px"><label for="diagnosis">Diagnosis</label><textarea id="diagnosis"></textarea></div>
-      <div style="margin-top:14px"><label for="teaching">Teaching point</label><textarea id="teaching"></textarea></div>
+      <div class="grid" style="margin-top:16px">
 
-      <label class="checkbox"><input id="published" type="checkbox" checked> Publish immediately to the student image bank</label>
+        <div>
+          <label for="title">Case title</label>
+          <input id="title" required placeholder="e.g. Achilles insertional tendinopathy">
+        </div>
+
+        <div>
+          <label for="region">Region</label>
+          <input id="region" placeholder="e.g. Posterior ankle">
+        </div>
+
+        <div>
+          <label for="difficulty">Difficulty</label>
+          <select id="difficulty">
+            <option>Foundation</option>
+            <option selected>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="tags">Tags</label>
+          <input id="tags" placeholder="Ankle, Tendon, Sports">
+        </div>
+
+      </div>
+
+      <div style="margin-top:14px">
+        <label for="history">Clinical history</label>
+        <textarea id="history"></textarea>
+      </div>
+
+      <div style="margin-top:14px">
+        <label for="question">Learner question</label>
+        <textarea id="question"></textarea>
+      </div>
+
+      <div style="margin-top:14px">
+        <label for="diagnosis">Diagnosis</label>
+        <textarea id="diagnosis"></textarea>
+      </div>
+
+      <div style="margin-top:14px">
+        <label for="teaching">Teaching point</label>
+        <textarea id="teaching"></textarea>
+      </div>
+
+      <label class="checkbox">
+        <input id="published" type="checkbox" checked>
+        Publish this case to the student image bank
+      </label>
+
     </div>
 
+
     <div class="card">
-      <div class="view-head"><div><h2 style="margin:0">Image comparisons</h2><div class="small">Add longitudinal, transverse, Doppler, dynamic views, etc.</div></div></div>
+
+      <div class="view-head">
+        <div>
+          <h2 style="margin:0">Image comparisons</h2>
+          <div class="small">
+            Existing images can be left unchanged, replaced individually, or removed. You can also add new image pairs.
+          </div>
+        </div>
+      </div>
+
       <div id="views"></div>
-      <div class="actions"><button id="addView" class="secondary" type="button">+ Add another image pair</button></div>
+
+      <div class="actions">
+        <button id="addView" class="secondary" type="button">
+          + Add another image pair
+        </button>
+      </div>
+
     </div>
 
+
     <div class="card">
-      <button id="saveCase" class="primary" type="submit">Save case to image bank</button>
+
+      <div class="actions" style="margin-top:0">
+
+        <button id="saveCase" class="primary" type="submit">
+          Save case to image bank
+        </button>
+
+        <button id="cancelEdit" class="secondary hidden" type="button">
+          Cancel editing
+        </button>
+
+      </div>
+
       <div id="saveStatus" class="status"></div>
+
     </div>
+
   </form>
 
+
   <div class="card">
-    <div class="view-head"><div><h2 style="margin:0">Cases added through Admin</h2><div class="small">These are stored in Supabase and appear automatically to students.</div></div><button id="refreshCases" class="secondary" type="button">Refresh</button></div>
+
+    <div class="view-head">
+
+      <div>
+        <h2 style="margin:0">Cases added through Admin</h2>
+        <div class="small">
+          Click Edit to change case text, swap images, add image pairs or remove image pairs.
+        </div>
+      </div>
+
+      <button id="refreshCases" class="secondary" type="button">
+        Refresh
+      </button>
+
+    </div>
+
     <div id="existingCases" class="existing" style="margin-top:14px"></div>
+
   </div>
+
+
+  <div class="card">
+
+    <div class="view-head">
+
+      <div>
+        <h2 style="margin:0">Admin settings</h2>
+        <div class="small">
+          Change the Admin password here. The password is not stored inside this HTML file.
+        </div>
+      </div>
+
+    </div>
+
+
+    <form id="changePasswordForm" style="margin-top:16px">
+
+      <div class="grid">
+
+        <div>
+
+          <label for="currentAdminPassword">
+            Current admin password
+          </label>
+
+          <input
+            id="currentAdminPassword"
+            type="password"
+            autocomplete="current-password"
+            required
+          >
+
+        </div>
+
+
+        <div>
+
+          <label for="newAdminPassword">
+            New admin password
+          </label>
+
+          <input
+            id="newAdminPassword"
+            type="password"
+            autocomplete="new-password"
+            minlength="10"
+            required
+          >
+
+          <div class="small" style="margin-top:5px">
+            Minimum 10 characters.
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <label for="confirmAdminPassword">
+            Confirm new password
+          </label>
+
+          <input
+            id="confirmAdminPassword"
+            type="password"
+            autocomplete="new-password"
+            minlength="10"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          id="changePasswordButton"
+          class="primary"
+          type="submit"
+        >
+          Change admin password
+        </button>
+
+      </div>
+
+      <div
+        id="changePasswordStatus"
+        class="status"
+      ></div>
+
+    </form>
+
+  </div>
+
 </section>
 
 </main>
-<script>
-const API = 'https://yfynhguvgoaxijkftkns.supabase.co/functions/v1/msk-image-bank';
-let adminPassword = "";
-let viewCounter = 0;
 
-async function apiJson(payload) {
-  const r = await fetch(API, {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
-  const data = await r.json().catch(()=>({}));
-  if(!r.ok) throw new Error(data.error || "Request failed");
+
+<script>
+
+const API = "https://yfynhguvgoaxijkftkns.supabase.co/functions/v1/msk-image-bank";
+
+const SETTINGS_RPC =
+  "https://yfynhguvgoaxijkftkns.supabase.co/rest/v1/rpc/msk_change_admin_password";
+
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmeW5oZ3V2Z29heGlqa2Z0a25zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYxNzc4NjMsImV4cCI6MjEwMTc1Mzg2M30.NYVTiJLqy7a9ZrTVZKFnWqJPGtmalcL-lMAA8Wn7L9o";
+
+let adminPassword = "";
+let adminCases = [];
+let editingCaseId = null;
+
+
+/* =========================================================
+API
+========================================================= */
+
+async function apiJson(payload){
+
+  const response =
+    await fetch(
+      API,
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(payload)
+      }
+    );
+
+  const data =
+    await response
+      .json()
+      .catch(()=>({}));
+
+  if(!response.ok){
+    throw new Error(
+      data.error
+      ||
+      "Request failed"
+    );
+  }
+
   return data;
 }
 
-document.getElementById("loginForm").addEventListener("submit", async e => {
-  e.preventDefault();
-  const status = document.getElementById("loginStatus");
-  status.className="status"; status.textContent="Checking…";
-  try {
-    const pw = document.getElementById("adminPassword").value;
-    const result = await apiJson({action:"admin-login",password:pw});
-    if(!result.ok) throw new Error("Incorrect admin password");
-    adminPassword = pw;
-    document.getElementById("loginCard").classList.add("hidden");
-    document.getElementById("adminArea").classList.remove("hidden");
-    addView();
-    await loadCases();
-  } catch(err) {
-    status.className="status bad"; status.textContent=err.message;
-  }
-});
 
-function addView() {
-  const i = viewCounter++;
-  const box = document.createElement("div");
-  box.className="view";
-  box.dataset.view=i;
-  box.innerHTML=`
+/* =========================================================
+LOGIN
+========================================================= */
+
+document
+.getElementById("loginForm")
+.addEventListener(
+  "submit",
+  async event => {
+
+    event.preventDefault();
+
+    const status =
+      document.getElementById(
+        "loginStatus"
+      );
+
+    status.className =
+      "status";
+
+    status.textContent =
+      "Checking…";
+
+    try {
+
+      const password =
+        document
+        .getElementById(
+          "adminPassword"
+        )
+        .value;
+
+      const result =
+        await apiJson({
+          action:"admin-login",
+          password
+        });
+
+      if(!result.ok){
+        throw new Error(
+          "Incorrect admin password"
+        );
+      }
+
+      adminPassword =
+        password;
+
+      document
+        .getElementById(
+          "loginCard"
+        )
+        .classList
+        .add("hidden");
+
+      document
+        .getElementById(
+          "adminArea"
+        )
+        .classList
+        .remove("hidden");
+
+      resetForm();
+
+      await loadCases();
+
+    }
+    catch(error){
+
+      status.className =
+        "status bad";
+
+      status.textContent =
+        error.message;
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+IMAGE PAIR UI
+========================================================= */
+
+function addView(
+  imageData = null
+) {
+
+  const holder =
+    document.getElementById(
+      "views"
+    );
+
+  const box =
+    document.createElement(
+      "div"
+    );
+
+  box.className =
+    "view";
+
+  if(
+    imageData
+    &&
+    imageData.id
+  ){
+    box.dataset.imageId =
+      imageData.id;
+  }
+
+
+  const existing =
+    Boolean(
+      imageData
+      &&
+      imageData.id
+    );
+
+
+  box.innerHTML =
+  `
+
     <div class="view-head">
-      <h3>Image pair <span class="view-number"></span></h3>
-      <button type="button" class="danger remove-view">Remove</button>
+
+      <h3>
+        Image pair
+        <span class="view-number"></span>
+      </h3>
+
+      <button
+        type="button"
+        class="danger remove-view"
+      >
+        Remove pair
+      </button>
+
     </div>
+
+
     <div class="grid" style="margin-top:12px">
-      <div><label>View title</label><input class="view-title" placeholder="e.g. Longitudinal" required></div>
-      <div><label>Caption</label><input class="view-caption" placeholder="e.g. Long-axis assessment"></div>
-      <div><label>Unannotated image</label><input class="plain-file" type="file" accept="image/png,image/jpeg,image/webp" required></div>
-      <div><label>Annotated image</label><input class="annotated-file" type="file" accept="image/png,image/jpeg,image/webp" required></div>
-    </div>`;
-  box.querySelector(".remove-view").addEventListener("click",()=>{ box.remove(); renumberViews(); });
-  document.getElementById("views").appendChild(box);
+
+      <div>
+
+        <label>
+          View title
+        </label>
+
+        <input
+          class="view-title"
+          placeholder="e.g. Longitudinal"
+          required
+          value="${escapeAttribute(imageData?.title || "")}"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Caption
+        </label>
+
+        <input
+          class="view-caption"
+          placeholder="e.g. Long-axis assessment"
+          value="${escapeAttribute(imageData?.caption || "")}"
+        >
+
+      </div>
+
+    </div>
+
+
+    ${
+      existing
+      ?
+      `
+      <div class="current-images">
+
+        <div class="current-image">
+
+          <img
+            src="${escapeAttribute(imageData.plain)}"
+            alt="Current unannotated image"
+          >
+
+          <div>
+            Current unannotated image
+          </div>
+
+        </div>
+
+
+        <div class="current-image">
+
+          <img
+            src="${escapeAttribute(imageData.annotated)}"
+            alt="Current annotated image"
+          >
+
+          <div>
+            Current annotated image
+          </div>
+
+        </div>
+
+      </div>
+      `
+      :
+      ""
+    }
+
+
+    <div class="grid" style="margin-top:14px">
+
+      <div>
+
+        <label>
+          ${
+            existing
+            ?
+            "Replace unannotated image (optional)"
+            :
+            "Unannotated image"
+          }
+        </label>
+
+        <input
+          class="plain-file"
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+          ${existing ? "" : "required"}
+        >
+
+        ${
+          existing
+          ?
+          `<div class="small" style="margin-top:5px">
+            Leave blank to keep the current image.
+          </div>`
+          :
+          ""
+        }
+
+      </div>
+
+
+      <div>
+
+        <label>
+          ${
+            existing
+            ?
+            "Replace annotated image (optional)"
+            :
+            "Annotated image"
+          }
+        </label>
+
+        <input
+          class="annotated-file"
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+          ${existing ? "" : "required"}
+        >
+
+        ${
+          existing
+          ?
+          `<div class="small" style="margin-top:5px">
+            Leave blank to keep the current image.
+          </div>`
+          :
+          ""
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  box
+    .querySelector(
+      ".remove-view"
+    )
+    .addEventListener(
+      "click",
+      ()=>{
+
+        const allViews =
+          document
+          .querySelectorAll(
+            "#views .view"
+          );
+
+        if(
+          allViews.length
+          <=
+          1
+        ){
+          alert(
+            "Each case must contain at least one image pair."
+          );
+
+          return;
+        }
+
+        box.remove();
+
+        renumberViews();
+
+      }
+    );
+
+
+  holder.appendChild(
+    box
+  );
+
   renumberViews();
+
 }
+
 
 function renumberViews() {
-  [...document.querySelectorAll(".view")].forEach((v,i)=>v.querySelector(".view-number").textContent=i+1);
+
+  [
+    ...document
+    .querySelectorAll(
+      "#views .view"
+    )
+  ]
+  .forEach(
+    (view,index)=>{
+
+      view
+        .querySelector(
+          ".view-number"
+        )
+        .textContent =
+        index + 1;
+
+    }
+  );
+
 }
 
-document.getElementById("addView").addEventListener("click", addView);
 
-document.getElementById("caseForm").addEventListener("submit", async e => {
-  e.preventDefault();
-  const status=document.getElementById("saveStatus");
-  const save=document.getElementById("saveCase");
-  const viewEls=[...document.querySelectorAll("#views .view")];
-  if(!viewEls.length) { status.className="status bad"; status.textContent="Add at least one image pair."; return; }
+document
+.getElementById(
+  "addView"
+)
+.addEventListener(
+  "click",
+  ()=>addView()
+);
 
-  const metadata={
-    title:document.getElementById("title").value.trim(),
-    region:document.getElementById("region").value.trim(),
-    difficulty:document.getElementById("difficulty").value,
-    tags:document.getElementById("tags").value.split(",").map(x=>x.trim()).filter(Boolean),
-    history:document.getElementById("history").value.trim(),
-    question:document.getElementById("question").value.trim(),
-    diagnosis:document.getElementById("diagnosis").value.trim(),
-    teachingNote:document.getElementById("teaching").value.trim(),
-    published:document.getElementById("published").checked,
-    images:viewEls.map(v=>({
-      title:v.querySelector(".view-title").value.trim(),
-      caption:v.querySelector(".view-caption").value.trim()
-    }))
-  };
 
-  const fd=new FormData();
-  fd.append("action","create-case");
-  fd.append("adminPassword",adminPassword);
-  fd.append("metadata",JSON.stringify(metadata));
-  viewEls.forEach((v,i)=>{
-    fd.append(`plain_${i}`,v.querySelector(".plain-file").files[0]);
-    fd.append(`annotated_${i}`,v.querySelector(".annotated-file").files[0]);
+/* =========================================================
+FORM MODE
+========================================================= */
+
+function resetForm() {
+
+  editingCaseId =
+    null;
+
+  const form =
+    document.getElementById(
+      "caseForm"
+    );
+
+  form.reset();
+
+  document
+    .getElementById(
+      "published"
+    )
+    .checked =
+    true;
+
+  document
+    .getElementById(
+      "difficulty"
+    )
+    .value =
+    "Intermediate";
+
+  document
+    .getElementById(
+      "views"
+    )
+    .innerHTML =
+    "";
+
+  addView();
+
+
+  document
+    .getElementById(
+      "formHeading"
+    )
+    .textContent =
+    "Add a new case";
+
+  document
+    .getElementById(
+      "formSubheading"
+    )
+    .textContent =
+    "Fill in the case details and upload at least one annotated/unannotated image pair.";
+
+  document
+    .getElementById(
+      "saveCase"
+    )
+    .textContent =
+    "Save case to image bank";
+
+  document
+    .getElementById(
+      "cancelEdit"
+    )
+    .classList
+    .add("hidden");
+
+  document
+    .getElementById(
+      "editBanner"
+    )
+    .classList
+    .add("hidden");
+
+  document
+    .getElementById(
+      "saveStatus"
+    )
+    .textContent =
+    "";
+
+}
+
+
+function startEdit(caseItem) {
+
+  editingCaseId =
+    caseItem.id;
+
+
+  document
+    .getElementById(
+      "title"
+    )
+    .value =
+    caseItem.title || "";
+
+  document
+    .getElementById(
+      "region"
+    )
+    .value =
+    caseItem.region || "";
+
+  document
+    .getElementById(
+      "difficulty"
+    )
+    .value =
+    caseItem.difficulty
+    ||
+    "Intermediate";
+
+  document
+    .getElementById(
+      "tags"
+    )
+    .value =
+    (caseItem.tags || [])
+      .join(", ");
+
+  document
+    .getElementById(
+      "history"
+    )
+    .value =
+    caseItem.history || "";
+
+  document
+    .getElementById(
+      "question"
+    )
+    .value =
+    caseItem.question || "";
+
+  document
+    .getElementById(
+      "diagnosis"
+    )
+    .value =
+    caseItem.diagnosis || "";
+
+  document
+    .getElementById(
+      "teaching"
+    )
+    .value =
+    caseItem.teachingNote || "";
+
+  document
+    .getElementById(
+      "published"
+    )
+    .checked =
+    Boolean(
+      caseItem.published
+    );
+
+
+  const holder =
+    document.getElementById(
+      "views"
+    );
+
+  holder.innerHTML =
+    "";
+
+
+  (
+    caseItem.images
+    ||
+    []
+  )
+  .forEach(
+    image =>
+      addView(image)
+  );
+
+
+  if(
+    !caseItem.images
+    ||
+    caseItem.images.length === 0
+  ){
+    addView();
+  }
+
+
+  document
+    .getElementById(
+      "formHeading"
+    )
+    .textContent =
+    "Edit case";
+
+  document
+    .getElementById(
+      "formSubheading"
+    )
+    .textContent =
+    "Change the text, replace either image in a pair, add more views, or remove unwanted views.";
+
+  document
+    .getElementById(
+      "saveCase"
+    )
+    .textContent =
+    "Save changes";
+
+  document
+    .getElementById(
+      "cancelEdit"
+    )
+    .classList
+    .remove("hidden");
+
+  document
+    .getElementById(
+      "editBanner"
+    )
+    .classList
+    .remove("hidden");
+
+  document
+    .getElementById(
+      "editBannerTitle"
+    )
+    .textContent =
+    " "
+    +
+    caseItem.title;
+
+
+  document
+    .getElementById(
+      "saveStatus"
+    )
+    .textContent =
+    "";
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
   });
 
-  save.disabled=true; status.className="status"; status.textContent="Uploading images and saving case…";
-  try {
-    const r=await fetch(API,{method:"POST",body:fd});
-    const data=await r.json().catch(()=>({}));
-    if(!r.ok) throw new Error(data.error||"Could not save case");
-    status.className="status good"; status.textContent="Saved. The case is now in the image bank.";
-    e.target.reset();
-    document.getElementById("published").checked=true;
-    document.getElementById("views").innerHTML="";
-    viewCounter=0; addView();
-    await loadCases();
-  } catch(err) {
-    status.className="status bad"; status.textContent=err.message;
-  } finally { save.disabled=false; }
-});
+}
+
+
+document
+.getElementById(
+  "cancelEdit"
+)
+.addEventListener(
+  "click",
+  resetForm
+);
+
+
+/* =========================================================
+SAVE / UPDATE CASE
+========================================================= */
+
+document
+.getElementById(
+  "caseForm"
+)
+.addEventListener(
+  "submit",
+  async event => {
+
+    event.preventDefault();
+
+
+    const status =
+      document.getElementById(
+        "saveStatus"
+      );
+
+    const saveButton =
+      document.getElementById(
+        "saveCase"
+      );
+
+    const viewElements =
+      [
+        ...document
+        .querySelectorAll(
+          "#views .view"
+        )
+      ];
+
+
+    if(
+      !viewElements.length
+    ){
+      status.className =
+        "status bad";
+
+      status.textContent =
+        "Add at least one image pair.";
+
+      return;
+    }
+
+
+    const metadata =
+    {
+
+      caseId:
+        editingCaseId,
+
+      title:
+        document
+        .getElementById(
+          "title"
+        )
+        .value
+        .trim(),
+
+      region:
+        document
+        .getElementById(
+          "region"
+        )
+        .value
+        .trim(),
+
+      difficulty:
+        document
+        .getElementById(
+          "difficulty"
+        )
+        .value,
+
+      tags:
+        document
+        .getElementById(
+          "tags"
+        )
+        .value
+        .split(",")
+        .map(
+          item =>
+            item.trim()
+        )
+        .filter(Boolean),
+
+      history:
+        document
+        .getElementById(
+          "history"
+        )
+        .value
+        .trim(),
+
+      question:
+        document
+        .getElementById(
+          "question"
+        )
+        .value
+        .trim(),
+
+      diagnosis:
+        document
+        .getElementById(
+          "diagnosis"
+        )
+        .value
+        .trim(),
+
+      teachingNote:
+        document
+        .getElementById(
+          "teaching"
+        )
+        .value
+        .trim(),
+
+      published:
+        document
+        .getElementById(
+          "published"
+        )
+        .checked,
+
+      images:
+        viewElements
+        .map(
+          view => ({
+
+            id:
+              view.dataset.imageId
+              ||
+              null,
+
+            title:
+              view
+              .querySelector(
+                ".view-title"
+              )
+              .value
+              .trim(),
+
+            caption:
+              view
+              .querySelector(
+                ".view-caption"
+              )
+              .value
+              .trim()
+
+          })
+        )
+
+    };
+
+
+    const formData =
+      new FormData();
+
+
+    formData.append(
+      "action",
+      editingCaseId
+      ?
+      "update-case"
+      :
+      "create-case"
+    );
+
+    formData.append(
+      "adminPassword",
+      adminPassword
+    );
+
+    formData.append(
+      "metadata",
+      JSON.stringify(
+        metadata
+      )
+    );
+
+
+    viewElements
+    .forEach(
+      (view,index)=>{
+
+        const plain =
+          view
+          .querySelector(
+            ".plain-file"
+          )
+          .files[0];
+
+        const annotated =
+          view
+          .querySelector(
+            ".annotated-file"
+          )
+          .files[0];
+
+
+        if(plain){
+          formData.append(
+            `plain_${index}`,
+            plain
+          );
+        }
+
+        if(annotated){
+          formData.append(
+            `annotated_${index}`,
+            annotated
+          );
+        }
+
+      }
+    );
+
+
+    saveButton.disabled =
+      true;
+
+    status.className =
+      "status";
+
+    status.textContent =
+      editingCaseId
+      ?
+      "Saving changes…"
+      :
+      "Uploading images and saving case…";
+
+
+    try {
+
+      const response =
+        await fetch(
+          API,
+          {
+            method:"POST",
+            body:formData
+          }
+        );
+
+      const data =
+        await response
+          .json()
+          .catch(()=>({}));
+
+
+      if(
+        !response.ok
+      ){
+        throw new Error(
+          data.error
+          ||
+          "Could not save case"
+        );
+      }
+
+
+      status.className =
+        "status good";
+
+      status.textContent =
+        editingCaseId
+        ?
+        "Changes saved."
+        :
+        "Case saved.";
+
+
+      await loadCases();
+
+
+      setTimeout(
+        ()=>resetForm(),
+        650
+      );
+
+    }
+    catch(error){
+
+      status.className =
+        "status bad";
+
+      status.textContent =
+        error.message;
+
+    }
+    finally {
+
+      saveButton.disabled =
+        false;
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+LOAD EXISTING CASES
+========================================================= */
 
 async function loadCases() {
-  const holder=document.getElementById("existingCases");
-  holder.innerHTML='<div class="small">Loading…</div>';
+
+  const holder =
+    document.getElementById(
+      "existingCases"
+    );
+
+  holder.innerHTML =
+    '<div class="small">Loading…</div>';
+
+
   try {
-    const data=await apiJson({action:"list-cases",password:adminPassword});
-    const cases=data.cases||[];
-    if(!cases.length) { holder.innerHTML='<div class="small">No Admin-added cases yet.</div>'; return; }
-    holder.innerHTML="";
-    cases.forEach(c=>{
-      const row=document.createElement("div"); row.className="existing-item";
-      row.innerHTML=`<div><strong>${escapeHtml(c.title)}</strong><div class="small">${escapeHtml(c.region)} · ${c.images.length} image comparison${c.images.length===1?"":"s"} · ${c.published?"Published":"Draft"}</div></div><button class="danger" type="button">Delete</button>`;
-      row.querySelector("button").addEventListener("click",async()=>{
-        if(!confirm(`Delete "${c.title}" and its uploaded images?`)) return;
-        try { await apiJson({action:"delete-case",password:adminPassword,caseId:c.id}); await loadCases(); }
-        catch(err) { alert(err.message); }
+
+    const data =
+      await apiJson({
+        action:"list-cases",
+        password:adminPassword
       });
-      holder.appendChild(row);
-    });
-  } catch(err) { holder.innerHTML=`<div class="status bad">${escapeHtml(err.message)}</div>`; }
+
+
+    adminCases =
+      data.cases
+      ||
+      [];
+
+
+    if(
+      !adminCases.length
+    ){
+      holder.innerHTML =
+        '<div class="small">No Admin-added cases yet.</div>';
+
+      return;
+    }
+
+
+    holder.innerHTML =
+      "";
+
+
+    adminCases
+    .forEach(
+      caseItem => {
+
+        const row =
+          document.createElement(
+            "div"
+          );
+
+        row.className =
+          "existing-item";
+
+
+        row.innerHTML =
+        `
+
+          <div>
+
+            <strong>
+              ${escapeHtml(caseItem.title)}
+            </strong>
+
+            <div class="small">
+
+              ${escapeHtml(caseItem.region)}
+
+              ·
+
+              ${caseItem.images.length}
+              image comparison${
+                caseItem.images.length === 1
+                ?
+                ""
+                :
+                "s"
+              }
+
+              ·
+
+              ${
+                caseItem.published
+                ?
+                "Published"
+                :
+                "Draft"
+              }
+
+            </div>
+
+          </div>
+
+
+          <div class="existing-actions">
+
+            <button
+              class="secondary edit-case"
+              type="button"
+            >
+              Edit
+            </button>
+
+            <button
+              class="danger delete-case"
+              type="button"
+            >
+              Delete
+            </button>
+
+          </div>
+
+        `;
+
+
+        row
+          .querySelector(
+            ".edit-case"
+          )
+          .addEventListener(
+            "click",
+            ()=>startEdit(caseItem)
+          );
+
+
+        row
+          .querySelector(
+            ".delete-case"
+          )
+          .addEventListener(
+            "click",
+            async ()=>{
+
+              const confirmed =
+                confirm(
+                  `Delete "${caseItem.title}" and all of its uploaded images?`
+                );
+
+              if(
+                !confirmed
+              ){
+                return;
+              }
+
+
+              try {
+
+                await apiJson({
+                  action:"delete-case",
+                  password:adminPassword,
+                  caseId:caseItem.id
+                });
+
+
+                if(
+                  editingCaseId
+                  ===
+                  caseItem.id
+                ){
+                  resetForm();
+                }
+
+
+                await loadCases();
+
+              }
+              catch(error){
+                alert(
+                  error.message
+                );
+              }
+
+            }
+          );
+
+
+        holder.appendChild(
+          row
+        );
+
+      }
+    );
+
+  }
+  catch(error){
+
+    holder.innerHTML =
+      `<div class="status bad">${escapeHtml(error.message)}</div>`;
+
+  }
+
 }
 
-document.getElementById("refreshCases").addEventListener("click",loadCases);
 
-function escapeHtml(v) {
-  return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
+document
+.getElementById(
+  "refreshCases"
+)
+.addEventListener(
+  "click",
+  loadCases
+);
+
+
+
+/* =========================================================
+CHANGE ADMIN PASSWORD
+========================================================= */
+
+document
+.getElementById(
+  "changePasswordForm"
+)
+.addEventListener(
+  "submit",
+  async event => {
+
+    event.preventDefault();
+
+
+    const currentPassword =
+      document
+      .getElementById(
+        "currentAdminPassword"
+      )
+      .value;
+
+    const newPassword =
+      document
+      .getElementById(
+        "newAdminPassword"
+      )
+      .value;
+
+    const confirmPassword =
+      document
+      .getElementById(
+        "confirmAdminPassword"
+      )
+      .value;
+
+    const status =
+      document
+      .getElementById(
+        "changePasswordStatus"
+      );
+
+    const button =
+      document
+      .getElementById(
+        "changePasswordButton"
+      );
+
+
+    status.className =
+      "status";
+
+    status.textContent =
+      "";
+
+
+    if(
+      newPassword
+      !==
+      confirmPassword
+    ){
+      status.className =
+        "status bad";
+
+      status.textContent =
+        "The new passwords do not match.";
+
+      return;
+    }
+
+
+    if(
+      newPassword.length
+      <
+      10
+    ){
+      status.className =
+        "status bad";
+
+      status.textContent =
+        "The new password must be at least 10 characters.";
+
+      return;
+    }
+
+
+    button.disabled =
+      true;
+
+    status.textContent =
+      "Changing password…";
+
+
+    try {
+
+      const response =
+        await fetch(
+          SETTINGS_RPC,
+          {
+            method:"POST",
+
+            headers:{
+              "Content-Type":"application/json",
+              "apikey":SUPABASE_ANON_KEY,
+              "Authorization":
+                `Bearer ${SUPABASE_ANON_KEY}`
+            },
+
+            body:JSON.stringify({
+              p_current_password:
+                currentPassword,
+
+              p_new_password:
+                newPassword
+            })
+          }
+        );
+
+
+      const data =
+        await response
+        .json()
+        .catch(()=>null);
+
+
+      if(
+        !response.ok
+      ){
+
+        let message =
+          "Could not change the password.";
+
+
+        if(
+          data
+          &&
+          data.message
+        ){
+          message =
+            data.message;
+        }
+
+
+        throw new Error(
+          message
+        );
+
+      }
+
+
+      adminPassword =
+        newPassword;
+
+
+      document
+      .getElementById(
+        "changePasswordForm"
+      )
+      .reset();
+
+
+      status.className =
+        "status good";
+
+      status.textContent =
+        "Admin password changed successfully. Use the new password next time you sign in.";
+
+    }
+    catch(error){
+
+      status.className =
+        "status bad";
+
+      status.textContent =
+        error.message;
+
+    }
+    finally {
+
+      button.disabled =
+        false;
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+SAFE TEXT
+========================================================= */
+
+function escapeHtml(value) {
+
+  return String(
+    value
+    ??
+    ""
+  )
+  .replace(
+    /[&<>"']/g,
+    character =>
+    ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+    })[
+      character
+    ]
+  );
+
 }
+
+
+function escapeAttribute(value) {
+  return escapeHtml(value);
+}
+
 </script>
+
 </body>
 </html>
