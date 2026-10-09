@@ -13,30 +13,18 @@
 
 <style>
 
-/* =========================================================
-COLOURS
-========================================================= */
-
 :root{
   --bg:#090c0b;
   --surface:#111613;
   --surface2:#171e1a;
   --surface3:#1d2621;
-
   --text:#f4f7f5;
   --muted:#aab5ae;
   --border:#2b3630;
-
   --green:#8dc63f;
   --green-soft:rgba(141,198,63,.12);
-
   --max:1180px;
 }
-
-
-/* =========================================================
-GENERAL
-========================================================= */
 
 *{
   box-sizing:border-box;
@@ -82,11 +70,7 @@ input:focus-visible{
 }
 
 .wrap{
-  width:min(
-    calc(100% - 36px),
-    var(--max)
-  );
-
+  width:min(calc(100% - 36px),var(--max));
   margin:0 auto;
 }
 
@@ -157,7 +141,6 @@ PASSWORD SCREEN
 
 .gate-card h2{
   margin:0 0 9px;
-
   font-size:29px;
 }
 
@@ -478,13 +461,11 @@ CASE LIBRARY
 
 .library-heading h3{
   margin:0;
-
   font-size:22px;
 }
 
 .library-heading p{
   margin:0;
-
   color:var(--muted);
 }
 
@@ -851,7 +832,6 @@ MULTIPLE IMAGE VIEWS
 
 .view-heading h4{
   margin:0;
-
   font-size:19px;
 }
 
@@ -1140,11 +1120,6 @@ input[type=range]{
   margin-top:12px;
 }
 
-
-/* =========================================================
-DIVIDER BETWEEN IMAGE VIEWS
-========================================================= */
-
 .view-divider{
   margin:28px 0;
 
@@ -1333,19 +1308,16 @@ MOBILE
 
   .keele-logo{
     width:145px;
-
     max-width:60%;
   }
 
   .library-heading{
     align-items:flex-start;
-
     flex-direction:column;
   }
 
   .case-topbar{
     align-items:flex-start;
-
     flex-direction:column;
   }
 
@@ -1359,7 +1331,6 @@ MOBILE
 
   .case-nav{
     align-items:stretch;
-
     flex-direction:column;
   }
 
@@ -1376,7 +1347,6 @@ MOBILE
 
   .footer-inner{
     align-items:flex-start;
-
     flex-direction:column;
   }
 
@@ -1659,6 +1629,8 @@ MSK Ultrasound Teaching Resource
 
 /* =========================================================
 PASSWORD
+
+CHANGE THIS IF REQUIRED
 ========================================================= */
 
 const SITE_PASSWORD =
@@ -1735,12 +1707,15 @@ passwordForm.addEventListener(
 
 
 /* =========================================================
-YOUR CASES
-
-THIS IS THE SECTION YOU EDIT WHEN ADDING CASES OR IMAGES
+CASES
 ========================================================= */
 
 const cases = [
+
+
+/* =========================================================
+CASE 1
+========================================================= */
 
 {
 
@@ -1766,19 +1741,14 @@ const cases = [
     "Patient presenting with plantar forefoot symptoms centred around the 3rd and 4th metatarsal heads, with a sensation described as walking on a small stone.",
 
   question:
-    "Review the ultrasound images. What structures and abnormality can you identify?",
-
-
-  /* =======================================================
-  EACH ITEM INSIDE images:[ ] CREATES ITS OWN SLIDER
-  ======================================================= */
+    "Review the ultrasound image. What structures and abnormality can you identify?",
 
   images:[
 
     {
 
       title:
-        "Primary ultrasound view",
+        "3rd/4th Webspace",
 
       caption:
         "Assess the image before dragging across to reveal the annotation.",
@@ -1791,137 +1761,97 @@ const cases = [
 
     }
 
-
-    /*
-    =======================================================
-    TO ADD A SECOND IMAGE TO THIS SAME CASE:
-
-    Put a comma after the } above and paste:
-
-    ,{
-
-      title:
-        "Longitudinal view",
-
-      caption:
-        "Long-axis assessment of the region of interest.",
-
-      plain:
-        "images/case-01-long-plain.jpg",
-
-      annotated:
-        "images/case-01-long-annotated.jpg"
-
-    }
-
-
-    THEN ANOTHER ONE COULD BE:
-
-    ,{
-
-      title:
-        "Transverse view",
-
-      caption:
-        "Short-axis assessment of the region of interest.",
-
-      plain:
-        "images/case-01-trans-plain.jpg",
-
-      annotated:
-        "images/case-01-trans-annotated.jpg"
-
-    }
-
-    =======================================================
-    */
-
   ],
 
   diagnosis:
     "Interdigital nerve abnormality within the 3rd/4th webspace.",
 
   teachingNote:
-    "Use the annotated images to follow the course of the interdigital nerve and correlate the abnormality with the surrounding webspace structures."
+    "Use the annotated image to follow the course of the interdigital nerve and correlate the measured abnormality with the surrounding webspace structures."
 
-}
+},
 
 
-/*
+/* =========================================================
+CASE 2
+========================================================= */
 
-=========================================================
-EXAMPLE OF A WHOLE NEW CASE WITH TWO SLIDERS
-=========================================================
+{
 
-Put a comma after the closing } of Case 1 and paste:
-
-,{
   id:
     "case-02",
 
   title:
-    "Insertional Achilles",
+    "Vastus Lateralis Myofascial Injury",
 
   region:
-    "Posterior ankle",
+    "Right anterior thigh",
 
   difficulty:
     "Intermediate",
 
   tags:[
-    "Ankle",
-    "Tendon",
-    "Achilles"
+    "Thigh",
+    "Muscle",
+    "Myofascial injury",
+    "Sports"
   ],
 
   history:
-    "Patient presenting with posterior heel pain aggravated by loading and activity.",
+    "18-year-old professional footballer following a direct contusion injury to the right thigh. He now reports difficulty performing a straight leg raise.",
 
   question:
-    "Review the longitudinal and transverse appearances. What abnormalities can you identify?",
+    "Review both imaging planes. Describe the abnormality, identify the anatomical structures involved and suggest the most likely injury pattern.",
 
   images:[
 
+
+    /* LONGITUDINAL */
+
     {
+
       title:
         "Longitudinal",
 
       caption:
-        "Long-axis assessment of the Achilles insertion.",
+        "Long-axis assessment through the lateral quadriceps compartment.",
 
       plain:
-        "images/case-02-long-plain.jpg",
+        "images/case-02-long-plain.png",
 
       annotated:
         "images/case-02-long-annotated.jpg"
+
     },
 
+
+    /* TRANSVERSE */
+
     {
+
       title:
         "Transverse",
 
       caption:
-        "Short-axis assessment of the Achilles tendon.",
+        "Short-axis assessment through the region of abnormality.",
 
       plain:
-        "images/case-02-trans-plain.jpg",
+        "images/case-02-trans-plain.png",
 
       annotated:
         "images/case-02-trans-annotated.jpg"
+
     }
 
   ],
 
   diagnosis:
-    "Insertional Achilles tendinopathy.",
+    "Posterior myofascial injury of the vastus lateralis with disruption of the posterior myofascial boundary and associated intermuscular fluid/haematoma tracking along the interface with vastus intermedius.",
 
   teachingNote:
-    "Correlate findings across both scanning planes. Assess tendon thickness, fibrillar architecture, insertional change and associated hyperaemia."
+    "Correlate the appearances across both imaging planes. The abnormality is centred at the posterior myofascial margin of vastus lateralis, with disruption of the myofascial boundary and fluid tracking along the interface with vastus intermedius. Consider how the anatomical location and extent of injury relate to the athlete's functional limitation."
+
 }
-
-=========================================================
-
-*/
 
 
 ];
@@ -2119,7 +2049,7 @@ function showLibrary(){
 
 
 /* =========================================================
-BUILD HTML FOR EACH IMAGE SLIDER
+BUILD IMAGE SLIDERS
 ========================================================= */
 
 function buildImageViews(caseItem){
@@ -2524,7 +2454,7 @@ function renderCase(){
 
 
 /* =========================================================
-SET UP EVERY SLIDER IN THE CASE
+SET UP ALL SLIDERS
 ========================================================= */
 
 function setupAllSliders(){
@@ -2549,7 +2479,7 @@ function setupAllSliders(){
 
 
 /* =========================================================
-SET UP ONE INDEPENDENT SLIDER
+SET UP ONE SLIDER
 ========================================================= */
 
 function setupSingleSlider(sliderBlock){
@@ -2721,7 +2651,8 @@ function setupSingleSlider(sliderBlock){
   setSlider(0);
 
 
-  const resizeHandler =
+  window.addEventListener(
+    "resize",
     ()=>{
 
       syncImageSize();
@@ -2730,12 +2661,7 @@ function setupSingleSlider(sliderBlock){
         currentValue
       );
 
-    };
-
-
-  window.addEventListener(
-    "resize",
-    resizeHandler
+    }
   );
 
 
@@ -2906,7 +2832,7 @@ function setupSingleSlider(sliderBlock){
 
 
 /* =========================================================
-DIAGNOSIS + TEACHING POINT
+REVEAL PANELS
 ========================================================= */
 
 function setupRevealButtons(){
@@ -2973,7 +2899,7 @@ function setupReveal(
 
 
 /* =========================================================
-CASE NAVIGATION
+NAVIGATION
 ========================================================= */
 
 function setupNavigation(){
@@ -3060,7 +2986,7 @@ function setupNavigation(){
 
 
 /* =========================================================
-MAIN BUTTON EVENTS
+MAIN BUTTONS
 ========================================================= */
 
 startButton.addEventListener(
