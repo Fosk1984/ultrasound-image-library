@@ -127,6 +127,9 @@ button:disabled{opacity:.5;cursor:not-allowed}
       <div class="grid" style="margin-top:16px">
 
         <div>
+          <label for="destination">Bank and joint</label>
+          <select id="destination"><option value="">Case library</option><optgroup label="Normal anatomy bank"><option value="Normal anatomy / Shoulder">Shoulder</option><option value="Normal anatomy / Elbow">Elbow</option><option value="Normal anatomy / Wrist">Wrist</option><option value="Normal anatomy / Hand and fingers">Hand and fingers</option><option value="Normal anatomy / Hip">Hip</option><option value="Normal anatomy / Knee">Knee</option><option value="Normal anatomy / Ankle">Ankle</option><option value="Normal anatomy / Foot and toes">Foot and toes</option></optgroup></select>
+        </div><div>
           <label for="title">Case title</label>
           <input id="title" required placeholder="e.g. Achilles insertional tendinopathy">
         </div>
@@ -163,7 +166,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
       </div>
 
       <div style="margin-top:14px">
-        <label for="diagnosis">Diagnosis</label>
+        <label for="diagnosis">Diagnosis or anatomical structure</label>
         <textarea id="diagnosis"></textarea>
       </div>
 
@@ -358,6 +361,8 @@ const SUPABASE_ANON_KEY =
 let adminPassword = "";
 let adminCases = [];
 let editingCaseId = null;
+const destination = document.getElementById("destination");
+const destinationTags = Array.from(destination.options, option => option.value).filter(Boolean);
 
 
 /* =========================================================
@@ -875,8 +880,8 @@ function startEdit(caseItem) {
       "tags"
     )
     .value =
-    (caseItem.tags || [])
-      .join(", ");
+    (caseItem.tags || []).filter(tag => !destinationTags.includes(tag)).join(", ");
+  destination.value = (caseItem.tags || []).find(tag => destinationTags.includes(tag)) || "";
 
   document
     .getElementById(
@@ -1103,7 +1108,8 @@ document
           item =>
             item.trim()
         )
-        .filter(Boolean),
+        .filter(tag => tag && !destinationTags.includes(tag))
+        .concat(destination.value ? [destination.value] : []),
 
       history:
         document
