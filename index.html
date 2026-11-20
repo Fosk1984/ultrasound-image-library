@@ -27,6 +27,43 @@ main{padding:34px 0 50px} .hero{margin-bottom:28px;padding:clamp(25px,5vw,48px);
 .reveals{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px} .reveal-card{padding:17px;border:1px solid var(--border);border-radius:15px;background:var(--surface2)} .reveal-head{display:flex;justify-content:space-between;gap:10px;align-items:center} .reveal-head h4{margin:0} .reveal-content{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);line-height:1.6}
 .nav{display:flex;justify-content:space-between;gap:12px;margin-top:25px;padding-top:20px;border-top:1px solid var(--border)} footer{padding:0 0 35px;color:#7f8b84;font-size:13px} .footer-inner{padding-top:18px;border-top:1px solid var(--border)}
 @media(max-width:720px){.header-inner{align-items:flex-start;flex-direction:column}.logo{width:145px;max-width:60%}.reveals{grid-template-columns:1fr}.nav{flex-direction:column}}
+
+.bank-switcher {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  max-width: 100%;
+  padding: 5px;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  background: #0d120f;
+}
+.bank-switcher a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 20px;
+  min-height: 46px;
+  border-radius: 11px;
+  color: #c7d1ca;
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.25;
+  text-decoration: none;
+  text-align: center;
+}
+.bank-switcher a:hover { background: var(--surface3); color: white; }
+.bank-switcher a[aria-current="location"] {
+  background: #a4d565;
+  color: #132009;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.26);
+}
+.bank-switcher a:focus-visible { outline: 2px solid white; outline-offset: -4px; }
+.bank-switcher a[aria-current]:focus-visible { outline-color: #243419; }
+@media (max-width: 480px) {
+  .bank-switcher { display: grid; }
+  .bank-switcher a { padding: 10px 8px; }
+}
 </style>
 </head>
 <body class="locked">
@@ -44,7 +81,7 @@ main{padding:34px 0 50px} .hero{margin-bottom:28px;padding:clamp(25px,5vw,48px);
 <main class="wrap">
 <section id="libraryView">
 <div class="hero"><div class="eyebrow">MSK Ultrasound Learning Resource</div><h2>Build your eye for ultrasound.</h2><p>Review the clinical context, assess each unannotated scan, then drag across the image to reveal the teaching annotations.</p></div>
-<nav class="actions" aria-label="Image banks"><a href="#cases">Case library</a><a href="#anatomy">Normal anatomy bank</a></nav>
+<nav class="bank-switcher" aria-label="Image banks"><a href="#cases">Case library</a><a href="#anatomy">Normal anatomy bank</a></nav>
 <h3 id="bankTitle">Case library</h3>
 <div id="jointGrid" class="case-grid" hidden></div><p id="bankStatus" class="muted" role="status"></p>
 <div id="caseGrid" class="case-grid" style="margin-top:16px"></div>
@@ -88,6 +125,11 @@ document.getElementById("loginForm").addEventListener("submit",async e=>{
 function renderLibrary(){
  const slug = joint => joint.toLowerCase().replaceAll(" ", "-");
  const anatomy = location.hash === "#anatomy" || location.hash.startsWith("#anatomy/");
+ const bankHref = anatomy ? "#anatomy" : "#cases";
+ for (const link of document.querySelectorAll(".bank-switcher a")) {
+   if (link.getAttribute("href") === bankHref) link.setAttribute("aria-current", "location");
+   else link.removeAttribute("aria-current");
+ }
  selectedJoint = anatomy ? joints.find(j => location.hash === "#anatomy/" + slug(j)) || "" : "";
  const anatomyJoint = item => joints.find(j => (item.tags || []).includes(jointTag(j)));
  cases = allCases.filter(item => anatomy ? selectedJoint && anatomyJoint(item) === selectedJoint : !anatomyJoint(item));
