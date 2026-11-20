@@ -44,7 +44,9 @@ main{padding:34px 0 50px} .hero{margin-bottom:28px;padding:clamp(25px,5vw,48px);
 <main class="wrap">
 <section id="libraryView">
 <div class="hero"><div class="eyebrow">MSK Ultrasound Learning Resource</div><h2>Build your eye for ultrasound.</h2><p>Review the clinical context, assess each unannotated scan, then drag across the image to reveal the teaching annotations.</p></div>
-<h3>Case Library</h3><p class="muted">New cases added through the Admin page appear here automatically.</p>
+<nav class="actions" aria-label="Image banks"><a href="#cases">Case library</a><a href="#anatomy">Normal anatomy bank</a></nav>
+<h3 id="bankTitle">Case library</h3>
+<div id="jointGrid" class="case-grid" hidden></div><p id="bankStatus" class="muted" role="status"></p>
 <div id="caseGrid" class="case-grid" style="margin-top:16px"></div>
 </section>
 <section id="caseView"><div class="case-shell"><div class="topbar"><button id="back" class="secondary" type="button">← Image Bank</button><div id="progress" class="muted"></div></div><div id="caseContent" class="case-content"></div></div></section>
@@ -56,7 +58,15 @@ main{padding:34px 0 50px} .hero{margin-bottom:28px;padding:clamp(25px,5vw,48px);
 const API='https://yfynhguvgoaxijkftkns.supabase.co/functions/v1/msk-image-bank';
 
 /* All cases are now managed through the Admin database. */
-let cases=[],activeIndex=0;
+const joints = ["Shoulder","Elbow","Wrist","Hand and fingers","Hip","Knee","Ankle","Foot and toes"];
+const jointTag = joint => "Normal anatomy / " + joint;
+let allCases = [], cases = [], activeIndex = 0;
+let selectedJoint = "";
+window.addEventListener("hashchange", () => {
+  if (document.getElementById("gate")) return;
+  showLibrary();
+  renderLibrary();
+});
 
 async function api(payload){
  const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
@@ -70,16 +80,35 @@ document.getElementById("loginForm").addEventListener("submit",async e=>{
  try{
   const password=document.getElementById("password").value;
   const result=await api({action:"list-cases",password});
-  cases=result.cases||[];
+  allCases=result.cases||[];
   document.body.classList.remove("locked"); document.getElementById("gate").remove(); renderLibrary();
  }catch(err){s.textContent=err.message;}
 });
 
 function renderLibrary(){
+ const slug = joint => joint.toLowerCase().replaceAll(" ", "-");
+ const anatomy = location.hash === "#anatomy" || location.hash.startsWith("#anatomy/");
+ selectedJoint = anatomy ? joints.find(j => location.hash === "#anatomy/" + slug(j)) || "" : "";
+ const anatomyJoint = item => joints.find(j => (item.tags || []).includes(jointTag(j)));
+ cases = allCases.filter(item => anatomy ? selectedJoint && anatomyJoint(item) === selectedJoint : !anatomyJoint(item));
+ document.getElementById("bankTitle").textContent = anatomy ? selectedJoint || "Normal anatomy bank" : "Case library";
+ const jointGrid = document.getElementById("jointGrid");
+ jointGrid.replaceChildren();
+ if (anatomy && !selectedJoint) {
+   for (const joint of joints) {
+     const link = document.createElement("a");
+     link.className = "library-card";
+     link.href = "#anatomy/" + slug(joint);
+     link.textContent = joint;
+     jointGrid.appendChild(link);
+   }
+ }
+ jointGrid.style.display = anatomy && !selectedJoint ? "grid" : "none";
+ document.getElementById("bankStatus").textContent = selectedJoint && !cases.length ? "No normal anatomy images have been published for this joint yet." : "";
  const grid=document.getElementById("caseGrid"); grid.innerHTML="";
  cases.forEach((c,i)=>{
   const b=document.createElement("button"); b.type="button"; b.className="library-card";
-  b.innerHTML=`<div class="eyebrow">Case ${i+1}</div><h4>${esc(c.title)}</h4><p>${esc(c.region)}</p><div class="view-count">${c.images.length} image comparison${c.images.length===1?"":"s"}</div><div class="tags"><span class="tag difficulty">${esc(c.difficulty)}</span>${(c.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`;
+  b.innerHTML=`<div class="eyebrow">Case ${i+1}</div><h4>${esc(c.title)}</h4><p>${esc(c.region)}</p><div class="view-count">${c.images.length} image comparison${c.images.length===1?"":"s"}</div><div class="tags"><span class="tag difficulty">${esc(c.difficulty)}</span>${(c.tags||[]).filter(t => t !== jointTag(selectedJoint)).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`;
   b.addEventListener("click",()=>openCase(i)); grid.appendChild(b);
  });
 }
@@ -99,12 +128,12 @@ function renderCase(){
   <div class="actions"><button class="secondary reset" type="button">↺ Reset image</button><button class="secondary full" type="button">Reveal full annotation</button></div>
  </div>`).join("");
  document.getElementById("caseContent").innerHTML=`
- <div class="eyebrow">Case ${activeIndex+1}</div><h2>${esc(c.title)}</h2><p class="muted">${esc(c.region)}</p><div class="tags"><span class="tag difficulty">${esc(c.difficulty)}</span>${(c.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
- <div class="info"><strong>Clinical history</strong><div style="margin-top:6px">${esc(c.history)}</div></div>
- <div class="challenge"><div class="eyebrow">Image challenge</div><h3>${esc(c.question)}</h3></div>
+ <div class="eyebrow">Case ${activeIndex+1}</div><h2>${esc(c.title)}</h2><p class="muted">${esc(c.region)}</p><div class="tags"><span class="tag difficulty">${esc(c.difficulty)}</span>${(c.tags||[]).filter(t => t !== jointTag(selectedJoint)).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
+ ${(!selectedJoint || c.history) ? `<div class="info"><strong>Clinical history</strong><div style="margin-top:6px">${esc(c.history)}</div></div>` : ""}
+ ${(!selectedJoint || c.question) ? `<div class="challenge"><div class="eyebrow">Image challenge</div><h3>${esc(c.question)}</h3></div>` : ""}
  ${views}
  <div class="reveals">
-  <div class="reveal-card"><div class="reveal-head"><h4>Diagnosis</h4><button class="secondary reveal" type="button">Reveal</button></div><div class="reveal-content"><strong>${esc(c.diagnosis)}</strong></div></div>
+  <div class="reveal-card"><div class="reveal-head"><h4>${selectedJoint ? "Structure" : "Diagnosis"}</h4><button class="secondary reveal" type="button">Reveal</button></div><div class="reveal-content"><strong>${esc(c.diagnosis)}</strong></div></div>
   <div class="reveal-card"><div class="reveal-head"><h4>Teaching point</h4><button class="secondary reveal" type="button">Reveal</button></div><div class="reveal-content">${esc(c.teachingNote)}</div></div>
  </div>
  <div class="nav"><button class="secondary" id="libraryBtn" type="button">☰ Image Bank</button><div class="actions" style="margin:0"><button class="secondary" id="prev" type="button">← Previous</button><button class="primary" id="next" type="button">${activeIndex===cases.length-1?"Back to Image Bank":"Next →"}</button></div></div>`;
